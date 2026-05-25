@@ -96,20 +96,20 @@
 
     .page p {
       font-size: calc(0.95rem * var(--page-scale, 1));
-      line-height: 1.85;
+      line-height: 1.45;
       color: #333;
       text-align: left;
-      margin-bottom: calc(12px * var(--page-scale, 1));
+      margin-bottom: calc(8px * var(--page-scale, 1));
     }
 
     .page blockquote {
       font-style: italic;
       font-size: calc(0.95rem * var(--page-scale, 1));
-      line-height: 1.75;
+      line-height: 1.45;
       color: #555;
       border-left: 2px solid #c8b99a;
-      padding-left: calc(12px * var(--page-scale, 1));
-      margin: calc(12px * var(--page-scale, 1)) 0;
+      padding-left: calc(10px * var(--page-scale, 1));
+      margin: calc(8px * var(--page-scale, 1)) 0;
       text-align: left;
     }
 
@@ -297,7 +297,7 @@
       const container = document.getElementById('book-container');
       const w = Math.min(container.offsetWidth, 720);
       const pageW = Math.floor(w / 2);
-      const pageH = Math.floor(pageW * 1.45);
+      const pageH = Math.floor(pageW * 1.9);
 
       // Scale content to fit page width (reference: 450px = full size)
       const scale = Math.min(1, pageW / 450);
@@ -328,6 +328,14 @@
     function updateReader(pageIndex) {
       const allPages = document.querySelectorAll('#book .page');
       const reader = document.getElementById('reader');
+
+      // Hide reader on the front cover
+      if (pageIndex === 0) {
+        reader.style.display = 'none';
+        return;
+      }
+
+      reader.style.display = 'block';
       reader.innerHTML = '';
 
       [pageIndex, pageIndex + 1].forEach(idx => {
