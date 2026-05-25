@@ -299,8 +299,8 @@
       const pageW = Math.floor(w / 2);
       const pageH = Math.floor(pageW * 1.45);
 
-      // Scale content to fit page width (reference: 300px = full size)
-      const scale = Math.min(1, pageW / 300);
+      // Scale content to fit page width (reference: 450px = full size)
+      const scale = Math.min(1, pageW / 450);
       document.querySelectorAll('.page, .page-cover').forEach(p => {
         p.style.setProperty('--page-scale', scale);
       });
