@@ -43,11 +43,13 @@
     /* Page styles */
     .page {
       background: #faf7f0;
-      padding: 40px 36px;
       font-family: 'Crimson Text', serif;
       display: flex;
       flex-direction: column;
       height: 100%;
+      overflow: hidden;
+      /* padding and font-size set via JS using --page-scale */
+      padding: calc(32px * var(--page-scale, 1)) calc(28px * var(--page-scale, 1));
     }
 
     .page-cover {
@@ -58,14 +60,15 @@
       align-items: center;
       justify-content: center;
       height: 100%;
-      padding: 48px 36px;
+      overflow: hidden;
+      padding: calc(40px * var(--page-scale, 1)) calc(28px * var(--page-scale, 1));
     }
 
     .page-cover h2 {
-      font-size: 1.7rem;
+      font-size: calc(1.5rem * var(--page-scale, 1));
       line-height: 1.5;
       font-weight: 400;
-      margin-bottom: 20px;
+      margin-bottom: calc(16px * var(--page-scale, 1));
       border: none;
       color: #f5f0e8;
       letter-spacing: normal;
@@ -74,46 +77,46 @@
     }
 
     .page-cover .cover-sub {
-      font-size: 0.85rem;
+      font-size: calc(0.78rem * var(--page-scale, 1));
       opacity: 0.55;
       font-style: italic;
       letter-spacing: 0.08em;
     }
 
     .page h2 {
-      font-size: 0.72rem;
+      font-size: calc(0.6rem * var(--page-scale, 1));
       font-weight: 600;
       letter-spacing: 0.2em;
       text-transform: uppercase;
       color: #999;
       border-bottom: 1px solid #e0d9cc;
-      padding-bottom: 10px;
-      margin-bottom: 20px;
+      padding-bottom: calc(8px * var(--page-scale, 1));
+      margin-bottom: calc(16px * var(--page-scale, 1));
     }
 
     .page p {
-      font-size: 1rem;
+      font-size: calc(0.95rem * var(--page-scale, 1));
       line-height: 1.85;
       color: #333;
       text-align: left;
-      margin-bottom: 14px;
+      margin-bottom: calc(12px * var(--page-scale, 1));
     }
 
     .page blockquote {
       font-style: italic;
-      font-size: 1.05rem;
+      font-size: calc(0.95rem * var(--page-scale, 1));
       line-height: 1.75;
       color: #555;
       border-left: 2px solid #c8b99a;
-      padding-left: 16px;
-      margin: 16px 0;
+      padding-left: calc(12px * var(--page-scale, 1));
+      margin: calc(12px * var(--page-scale, 1)) 0;
       text-align: left;
     }
 
     .page-number {
       margin-top: auto;
-      padding-top: 16px;
-      font-size: 0.75rem;
+      padding-top: calc(12px * var(--page-scale, 1));
+      font-size: calc(0.7rem * var(--page-scale, 1));
       color: #bbb;
       text-align: center;
       font-style: italic;
@@ -221,6 +224,12 @@
       const w = Math.min(container.offsetWidth, 720);
       const pageW = Math.floor(w / 2);
       const pageH = Math.floor(pageW * 1.45);
+
+      // Scale content to fit page width (reference: 300px = full size)
+      const scale = Math.min(1, pageW / 300);
+      document.querySelectorAll('.page, .page-cover').forEach(p => {
+        p.style.setProperty('--page-scale', scale);
+      });
 
       window.pageFlip = new St.PageFlip(document.getElementById('book'), {
         width: pageW,
