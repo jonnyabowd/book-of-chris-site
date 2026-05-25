@@ -7,31 +7,239 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/page-flip/dist/js/page-flip.browser.js"></script>
   <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
     body {
       font-family: 'Crimson Text', serif;
       text-align: center;
-      margin: 0;
-      padding: 0 16px;
+      background: #f5f0e8;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 16px 60px;
     }
-    .book-wrap {
-      position: fixed;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 90%;
-      max-width: 620px;
+
+    h1 {
+      font-size: 2.2rem;
+      margin-bottom: 6px;
+      color: #222;
+    }
+
+    .subtitle {
+      font-size: 1rem;
+      color: #999;
+      font-style: italic;
+      margin-bottom: 40px;
+    }
+
+    #book-container {
+      width: 100%;
+      max-width: 720px;
+    }
+
+    /* Page styles */
+    .page {
+      background: #faf7f0;
+      padding: 40px 36px;
+      font-family: 'Crimson Text', serif;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .page-cover {
+      background: #2c2416;
+      color: #f5f0e8;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      padding: 48px 36px;
+    }
+
+    .page-cover h2 {
+      font-size: 1.7rem;
+      line-height: 1.5;
+      font-weight: 400;
+      margin-bottom: 20px;
+      border: none;
+      color: #f5f0e8;
+      letter-spacing: normal;
+      text-transform: none;
+      padding: 0;
+    }
+
+    .page-cover .cover-sub {
+      font-size: 0.85rem;
+      opacity: 0.55;
+      font-style: italic;
+      letter-spacing: 0.08em;
+    }
+
+    .page h2 {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #999;
+      border-bottom: 1px solid #e0d9cc;
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+    }
+
+    .page p {
+      font-size: 1rem;
+      line-height: 1.85;
+      color: #333;
+      text-align: left;
+      margin-bottom: 14px;
+    }
+
+    .page blockquote {
+      font-style: italic;
+      font-size: 1.05rem;
+      line-height: 1.75;
+      color: #555;
+      border-left: 2px solid #c8b99a;
+      padding-left: 16px;
+      margin: 16px 0;
+      text-align: left;
+    }
+
+    .page-number {
+      margin-top: auto;
+      padding-top: 16px;
+      font-size: 0.75rem;
+      color: #bbb;
+      text-align: center;
+      font-style: italic;
+    }
+
+    /* Navigation */
+    .book-nav {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 28px;
+    }
+
+    .book-nav button {
+      background: none;
+      border: 1.5px solid #999;
+      border-radius: 999px;
+      padding: 8px 22px;
+      font-family: 'Crimson Text', serif;
+      font-size: 1rem;
+      cursor: pointer;
+      color: #555;
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
+    }
+
+    .book-nav button:hover {
+      background: #2c2416;
+      color: #f5f0e8;
+      border-color: #2c2416;
+    }
+
+    #page-info {
+      font-size: 0.9rem;
+      color: #999;
+      font-style: italic;
+      min-width: 80px;
     }
   </style>
 </head>
 <body>
-  <h1><em>The</em> Book <em>of</em> Chris T.</h1>
-  <h2>Chapter 1, Verse 1</h2>
-  <p>"Thou shalt not smell thine own farts and grin, for what is fragrant unto thee is an abomination unto thy neighbor."</p>
-  <p>— Chris T.</p>
 
-  <div class="book-wrap">
-    <img src="images/IMG_9918.jpeg" alt="Open book illustration" style="width: 100%; max-width: 620px;"/>
+  <h1><em>The</em> Book <em>of</em> Chris T.</h1>
+  <p class="subtitle">Writing &amp; Content Design</p>
+
+  <div id="book-container">
+    <div id="book">
+
+      <!-- Cover -->
+      <div class="page page-cover" data-density="hard">
+        <h2><em>The</em> Book<br><em>of</em> Chris T.</h2>
+        <p class="cover-sub">Writing &amp; Content Design</p>
+      </div>
+
+      <!-- Page 1 -->
+      <div class="page">
+        <h2>Introduction</h2>
+        <p>These are the collected works of Chris T. — writer, content designer, and occasional prophet of plain language.</p>
+        <blockquote>"Thou shalt not smell thine own farts and grin, for what is fragrant unto thee is an abomination unto thy neighbor."</blockquote>
+        <p style="font-size: 0.85rem; color: #888; text-align: left;">— Chapter 1, Verse 1</p>
+        <div class="page-number">i</div>
+      </div>
+
+      <!-- Page 2 -->
+      <div class="page">
+        <h2>UX Writing</h2>
+        <p>Placeholder for a UX writing sample — microcopy, error messages, onboarding flows, or other interface text.</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore.</p>
+        <div class="page-number">1</div>
+      </div>
+
+      <!-- Page 3 -->
+      <div class="page">
+        <h2>Content Strategy</h2>
+        <p>Placeholder for a content strategy sample — a case study, content framework, or editorial guidelines.</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore.</p>
+        <div class="page-number">2</div>
+      </div>
+
+      <!-- Page 4 -->
+      <div class="page">
+        <h2>Long-form Writing</h2>
+        <p>Placeholder for a long-form writing sample — essays, articles, or narrative content.</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        <div class="page-number">3</div>
+      </div>
+
+      <!-- Back Cover -->
+      <div class="page page-cover" data-density="hard">
+        <p class="cover-sub">More words. Less fluff.</p>
+      </div>
+
+    </div>
   </div>
+
+  <div class="book-nav">
+    <button onclick="pageFlip.flipPrev()">&#8592; Prev</button>
+    <span id="page-info">Page 1</span>
+    <button onclick="pageFlip.flipNext()">Next &#8594;</button>
+  </div>
+
+  <script>
+    function initBook() {
+      const container = document.getElementById('book-container');
+      const w = Math.min(container.offsetWidth, 720);
+      const pageW = Math.floor(w / 2);
+      const pageH = Math.floor(pageW * 1.45);
+
+      window.pageFlip = new St.PageFlip(document.getElementById('book'), {
+        width: pageW,
+        height: pageH,
+        showCover: true,
+        mobileScrollSupport: true,
+        flippingTime: 800,
+      });
+
+      pageFlip.loadFromHTML(document.querySelectorAll('.page'));
+
+      pageFlip.on('flip', (e) => {
+        const current = e.data + 1;
+        const total = pageFlip.getPageCount();
+        document.getElementById('page-info').textContent = `Page ${current} of ${total}`;
+      });
+    }
+
+    document.fonts.ready.then(initBook);
+  </script>
 </body>
 </html>
