@@ -374,6 +374,7 @@
         flippingTime: 800,
         drawShadow: true,
         maxShadowOpacity: 1,
+        startPage: 1,
       });
 
       pageFlip.loadFromHTML(document.querySelectorAll('.page'));
@@ -385,7 +386,7 @@
         updateReader(e.data);
       });
 
-      updateReader(0);
+      updateReader(1);
     }
 
     function updateReader(pageIndex) {
