@@ -247,7 +247,7 @@
       </div>
 
       <!-- Page 1 -->
-      <div class="page">
+      <div class="page" style="justify-content: center;">
         <h2>Introduction</h2>
         <p>These are the collected works of Chris T. — writer, content designer, and occasional prophet of plain language.</p>
         <blockquote>"Thou shalt not smell thine own farts and grin, for what is fragrant unto thee is an abomination unto thy neighbor."</blockquote>
@@ -302,8 +302,8 @@
       const pageW = Math.floor(w / 2);
       const pageH = Math.floor(pageW * 1.9);
 
-      // Scale content to fit page width (reference: 1100px = full size)
-      const scale = Math.min(1, pageW / 1100);
+      // Scale content to fit page width (reference: 1800px = full size)
+      const scale = Math.min(1, pageW / 1800);
       document.querySelectorAll('.page, .page-cover').forEach(p => {
         p.style.setProperty('--page-scale', scale);
       });
@@ -334,8 +334,9 @@
       const allPages = document.querySelectorAll('#book .page');
       const reader = document.getElementById('reader');
 
-      // Hide reader on the front cover
-      if (pageIndex === 0) {
+      // Hide reader on front and back covers
+      const currentPage = allPages[pageIndex];
+      if (!currentPage || currentPage.classList.contains('page-cover')) {
         reader.style.display = 'none';
         return;
       }
