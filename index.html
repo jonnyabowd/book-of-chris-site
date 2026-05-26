@@ -41,19 +41,72 @@
       filter: drop-shadow(0 22px 18px rgba(0,0,0,0.12));
     }
 
-    /* Page styles */
+    /* Page outer shell — StPageFlip sizes these */
     .page {
       background: #faf7f0;
-      font-family: 'Crimson Text', serif;
-      display: flex;
-      flex-direction: column;
       height: 100%;
       overflow: hidden;
-      /* padding and font-size set via JS using --page-scale */
-      padding: calc(32px * var(--page-scale, 1)) calc(28px * var(--page-scale, 1));
+      position: relative;
       box-shadow: inset -18px 0 30px rgba(0,0,0,0.14), inset 18px 0 30px rgba(0,0,0,0.08);
     }
 
+    /* Inner content scaled way down via transform to hit ~5px visual text */
+    .page-inner {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: calc(100% / 0.28);
+      padding: 40px 36px;
+      display: flex;
+      flex-direction: column;
+      transform: scale(0.28);
+      transform-origin: top left;
+    }
+
+    .page-inner.centered {
+      top: 50%;
+      transform: scale(0.28) translateY(-50%);
+    }
+
+    .page-inner h2 {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #999;
+      border-bottom: 1px solid #e0d9cc;
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+    }
+
+    .page-inner p {
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: #333;
+      text-align: left;
+      margin-bottom: 14px;
+    }
+
+    .page-inner blockquote {
+      font-style: italic;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: #555;
+      border-left: 2px solid #c8b99a;
+      padding-left: 14px;
+      margin: 14px 0;
+      text-align: left;
+    }
+
+    .page-inner .page-number {
+      margin-top: 24px;
+      font-size: 0.75rem;
+      color: #bbb;
+      text-align: center;
+      font-style: italic;
+    }
+
+    /* Cover pages */
     .page-cover {
       background: #2c2416;
       color: #f5f0e8;
@@ -63,66 +116,32 @@
       justify-content: center;
       height: 100%;
       overflow: hidden;
-      padding: calc(40px * var(--page-scale, 1)) calc(28px * var(--page-scale, 1));
       box-shadow: inset -18px 0 30px rgba(0,0,0,0.3), inset 18px 0 30px rgba(0,0,0,0.15);
     }
 
+    .page-cover .cover-inner {
+      transform: scale(0.28);
+      transform-origin: center;
+      width: calc(100% / 0.28);
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
     .page-cover h2 {
-      font-size: calc(1.5rem * var(--page-scale, 1));
+      font-size: 1.5rem;
       line-height: 1.5;
       font-weight: 400;
-      margin-bottom: calc(16px * var(--page-scale, 1));
-      border: none;
+      margin-bottom: 16px;
       color: #f5f0e8;
-      letter-spacing: normal;
-      text-transform: none;
-      padding: 0;
     }
 
     .page-cover .cover-sub {
-      font-size: calc(0.78rem * var(--page-scale, 1));
+      font-size: 0.78rem;
       opacity: 0.55;
       font-style: italic;
       letter-spacing: 0.08em;
-    }
-
-    .page h2 {
-      font-size: calc(0.6rem * var(--page-scale, 1));
-      font-weight: 600;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: #999;
-      border-bottom: 1px solid #e0d9cc;
-      padding-bottom: calc(8px * var(--page-scale, 1));
-      margin-bottom: calc(16px * var(--page-scale, 1));
-    }
-
-    .page p {
-      font-size: calc(0.95rem * var(--page-scale, 1));
-      line-height: 1.45;
-      color: #333;
-      text-align: left;
-      margin-bottom: calc(8px * var(--page-scale, 1));
-    }
-
-    .page blockquote {
-      font-style: italic;
-      font-size: calc(0.95rem * var(--page-scale, 1));
-      line-height: 1.45;
-      color: #555;
-      border-left: 2px solid #c8b99a;
-      padding-left: calc(10px * var(--page-scale, 1));
-      margin: calc(8px * var(--page-scale, 1)) 0;
-      text-align: left;
-    }
-
-    .page-number {
-      margin-top: auto;
-      padding-top: calc(12px * var(--page-scale, 1));
-      font-size: calc(0.7rem * var(--page-scale, 1));
-      color: #bbb;
-      text-align: center;
-      font-style: italic;
     }
 
     /* Navigation */
@@ -176,13 +195,6 @@
       border-top: 1px solid #ddd;
     }
 
-    .reader-page.is-cover {
-      background: #2c2416;
-      color: #f5f0e8;
-      text-align: center;
-      padding: 48px 32px;
-    }
-
     .reader-page h2 {
       font-size: 0.72rem;
       font-weight: 600;
@@ -194,29 +206,11 @@
       margin-bottom: 20px;
     }
 
-    .reader-page.is-cover h2 {
-      font-size: 1.8rem;
-      letter-spacing: normal;
-      text-transform: none;
-      font-weight: 400;
-      color: #f5f0e8;
-      border: none;
-      padding: 0;
-      margin-bottom: 16px;
-    }
-
     .reader-page p {
       font-size: 1.15rem;
       line-height: 1.9;
       color: #333;
       margin-bottom: 16px;
-    }
-
-    .reader-page.is-cover p,
-    .reader-page.is-cover .cover-sub {
-      font-size: 0.9rem;
-      color: rgba(245, 240, 232, 0.55);
-      font-style: italic;
     }
 
     .reader-page blockquote {
@@ -240,48 +234,59 @@
   <div id="book-container">
     <div id="book">
 
-      <!-- Cover -->
+      <!-- Front Cover -->
       <div class="page page-cover" data-density="hard">
-        <h2><em>The</em> Book<br><em>of</em> Chris T.</h2>
-        <p class="cover-sub">Writing &amp; Content Design</p>
+        <div class="cover-inner">
+          <h2><em>The</em> Book<br><em>of</em> Chris T.</h2>
+          <p class="cover-sub">Writing &amp; Content Design</p>
+        </div>
       </div>
 
-      <!-- Page 1 -->
-      <div class="page" style="justify-content: center;">
-        <h2>Introduction</h2>
-        <p>These are the collected works of Chris T. — writer, content designer, and occasional prophet of plain language.</p>
-        <blockquote>"Thou shalt not smell thine own farts and grin, for what is fragrant unto thee is an abomination unto thy neighbor."</blockquote>
-        <p style="font-size: 0.85rem; color: #888; text-align: left;">— Chapter 1, Verse 1</p>
-        <div class="page-number">i</div>
-      </div>
-
-      <!-- Page 2 -->
+      <!-- Page 1 — Introduction (vertically centered) -->
       <div class="page">
-        <h2>UX Writing</h2>
-        <p>Placeholder for a UX writing sample — microcopy, error messages, onboarding flows, or other interface text.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore.</p>
-        <div class="page-number">1</div>
+        <div class="page-inner centered">
+          <h2>Introduction</h2>
+          <p>These are the collected works of Chris T. — writer, content designer, and occasional prophet of plain language.</p>
+          <blockquote>"Thou shalt not smell thine own farts and grin, for what is fragrant unto thee is an abomination unto thy neighbor."</blockquote>
+          <p style="font-size: 0.85rem; color: #888; text-align: left;">— Chapter 1, Verse 1</p>
+        </div>
       </div>
 
-      <!-- Page 3 -->
+      <!-- Page 2 — UX Writing -->
       <div class="page">
-        <h2>Content Strategy</h2>
-        <p>Placeholder for a content strategy sample — a case study, content framework, or editorial guidelines.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore.</p>
-        <div class="page-number">2</div>
+        <div class="page-inner">
+          <h2>UX Writing</h2>
+          <p>Placeholder for a UX writing sample — microcopy, error messages, onboarding flows, or other interface text.</p>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore.</p>
+          <div class="page-number">1</div>
+        </div>
       </div>
 
-      <!-- Page 4 -->
+      <!-- Page 3 — Content Strategy -->
       <div class="page">
-        <h2>Long-form Writing</h2>
-        <p>Placeholder for a long-form writing sample — essays, articles, or narrative content.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-        <div class="page-number">3</div>
+        <div class="page-inner">
+          <h2>Content Strategy</h2>
+          <p>Placeholder for a content strategy sample — a case study, content framework, or editorial guidelines.</p>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore.</p>
+          <div class="page-number">2</div>
+        </div>
+      </div>
+
+      <!-- Page 4 — Long-form Writing -->
+      <div class="page">
+        <div class="page-inner">
+          <h2>Long-form Writing</h2>
+          <p>Placeholder for a long-form writing sample — essays, articles, or narrative content.</p>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+          <div class="page-number">3</div>
+        </div>
       </div>
 
       <!-- Back Cover -->
       <div class="page page-cover" data-density="hard">
-        <p class="cover-sub">More words. Less fluff.</p>
+        <div class="cover-inner">
+          <p class="cover-sub">More words. Less fluff.</p>
+        </div>
       </div>
 
     </div>
@@ -301,12 +306,6 @@
       const w = Math.min(container.offsetWidth, 720);
       const pageW = Math.floor(w / 2);
       const pageH = Math.floor(pageW * 1.9);
-
-      // Scale content to fit page width (reference: 1800px = full size)
-      const scale = Math.min(1, pageW / 1800);
-      document.querySelectorAll('.page, .page-cover').forEach(p => {
-        p.style.setProperty('--page-scale', scale);
-      });
 
       window.pageFlip = new St.PageFlip(document.getElementById('book'), {
         width: pageW,
@@ -334,7 +333,6 @@
       const allPages = document.querySelectorAll('#book .page');
       const reader = document.getElementById('reader');
 
-      // Hide reader on front and back covers
       const currentPage = allPages[pageIndex];
       if (!currentPage || currentPage.classList.contains('page-cover')) {
         reader.style.display = 'none';
@@ -346,10 +344,12 @@
 
       [pageIndex, pageIndex + 1].forEach(idx => {
         const source = allPages[idx];
-        if (!source) return;
+        if (!source || source.classList.contains('page-cover')) return;
         const div = document.createElement('div');
-        div.className = 'reader-page' + (source.classList.contains('page-cover') ? ' is-cover' : '');
-        div.innerHTML = source.innerHTML;
+        div.className = 'reader-page';
+        // Pull content from page-inner, not the page shell
+        const inner = source.querySelector('.page-inner');
+        div.innerHTML = inner ? inner.innerHTML : source.innerHTML;
         reader.appendChild(div);
       });
     }
