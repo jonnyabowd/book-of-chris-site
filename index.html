@@ -379,10 +379,11 @@
 
       pageFlip.loadFromHTML(document.querySelectorAll('.page'));
 
+      const total = pageFlip.getPageCount();
+      document.getElementById('page-info').textContent = `Page ${pageFlip.getCurrentPageIndex() + 1} of ${total}`;
+
       pageFlip.on('flip', (e) => {
-        const current = e.data + 1;
-        const total = pageFlip.getPageCount();
-        document.getElementById('page-info').textContent = `Page ${current} of ${total}`;
+        document.getElementById('page-info').textContent = `Page ${e.data + 1} of ${total}`;
         updateReader(e.data);
       });
 
