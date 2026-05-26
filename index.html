@@ -50,22 +50,21 @@
       box-shadow: inset -18px 0 30px rgba(0,0,0,0.14), inset 18px 0 30px rgba(0,0,0,0.08);
     }
 
-    /* Inner content scaled way down via transform to hit ~5px visual text */
+    /* Inner content scaled down via transform */
     .page-inner {
       position: absolute;
       top: 0;
       left: 0;
-      width: calc(100% / 0.28);
+      width: calc(100% / 0.4);
       padding: 40px 36px;
       display: flex;
       flex-direction: column;
-      transform: scale(0.28);
+      transform: scale(0.4);
       transform-origin: top left;
     }
 
     .page-inner.centered {
-      top: 50%;
-      transform: scale(0.28) translateY(-50%);
+      padding-top: 100px;
     }
 
     .page-inner h2 {
@@ -120,9 +119,9 @@
     }
 
     .page-cover .cover-inner {
-      transform: scale(0.28);
+      transform: scale(0.4);
       transform-origin: center;
-      width: calc(100% / 0.28);
+      width: calc(100% / 0.4);
       text-align: center;
       display: flex;
       flex-direction: column;
