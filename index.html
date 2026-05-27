@@ -19,7 +19,26 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 40px 16px 60px;
+      padding: 0 16px 60px;
+    }
+
+    .viewport-top {
+      width: 100%;
+      min-height: 33.33vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px 0;
+    }
+
+    .viewport-bottom {
+      width: 100%;
+      min-height: 66.67vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
     }
 
     h1 {
@@ -33,7 +52,6 @@
       font-size: 1rem;
       color: #999;
       font-style: italic;
-      margin-bottom: 40px;
     }
 
     #book-container {
@@ -192,7 +210,6 @@
       align-items: center;
       justify-content: center;
       gap: 20px;
-      margin-top: 28px;
       position: sticky;
       top: 0;
       z-index: 100;
@@ -308,9 +325,12 @@
 </head>
 <body>
 
-  <h1><em>The</em> Book <em>of</em> Chris T.</h1>
-  <p class="subtitle">Content Writer, Designer, Strategist</p>
+  <div class="viewport-top">
+    <h1><em>The</em> Book <em>of</em> Chris T.</h1>
+    <p class="subtitle">Content Writer, Designer, Strategist</p>
+  </div>
 
+  <div class="viewport-bottom">
   <div id="book-container">
     <div id="book">
 
@@ -437,6 +457,7 @@
     <button onclick="pageFlip.flipPrev()">&#8592; Prev</button>
     <span id="page-info">Page 1</span>
     <button onclick="pageFlip.flipNext()">Next &#8594;</button>
+  </div>
   </div>
 
   <div id="scroll-arrow">
