@@ -410,31 +410,19 @@
 
       pageFlip.on('flip', (e) => {
         document.getElementById('page-info').textContent = pageLabel(e.data);
-        updateReader(e.data);
       });
 
-      updateReader(1);
+      populateReader();
     }
 
-    function updateReader(pageIndex) {
+    function populateReader() {
       const allPages = document.querySelectorAll('#book .page');
       const reader = document.getElementById('reader');
-
-      const currentPage = allPages[pageIndex];
-      if (!currentPage || currentPage.classList.contains('page-cover')) {
-        reader.style.display = 'none';
-        return;
-      }
-
-      reader.style.display = 'block';
       reader.innerHTML = '';
-
-      [pageIndex, pageIndex + 1].forEach(idx => {
-        const source = allPages[idx];
-        if (!source || source.classList.contains('page-cover')) return;
+      allPages.forEach(source => {
+        if (source.classList.contains('page-cover')) return;
         const div = document.createElement('div');
         div.className = 'reader-page';
-        // Pull content from page-inner, not the page shell
         const inner = source.querySelector('.page-inner');
         div.innerHTML = inner ? inner.innerHTML : source.innerHTML;
         reader.appendChild(div);
