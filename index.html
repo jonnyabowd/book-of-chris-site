@@ -99,6 +99,10 @@
 
     .page-inner .reader-only { display: none !important; }
     .reader-page .book-only { display: none !important; }
+    .reader-page .reader-only { height: auto !important; }
+    .reader-page .reader-only img { max-height: none; width: 100%; }
+    .reader-page .img-container { height: auto !important; }
+    .reader-page .img-container img { max-height: none; max-width: 100%; width: 100%; }
 
     .page-inner p {
       font-size: 0.95rem;
@@ -273,7 +277,7 @@
       <div class="page">
         <div class="page-inner">
           <h2>About</h2>
-          <div style="height: 200px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
+          <div class="img-container" style="height: 200px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
             <img src="images/image_transparent_original.png" style="max-height: 100%; max-width: 50%; object-fit: contain;">
           </div>
           <p>Senior UX Content Strategist with over a decade of experience in content design, user experience, and digital transformation.</p>
