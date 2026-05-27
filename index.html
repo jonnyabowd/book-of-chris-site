@@ -490,7 +490,7 @@
       const arrow = document.getElementById('scroll-arrow');
       const currentTop = arrow.getBoundingClientRect().top + window.scrollY;
       const targetTop = window.innerHeight - arrow.offsetHeight - 32;
-      const margin = Math.max(targetTop - currentTop, 24);
+      const margin = Math.max(targetTop - currentTop, 24) + 140;
       arrow.style.marginTop = margin + 'px';
     }
 
