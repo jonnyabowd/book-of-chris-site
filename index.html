@@ -262,6 +262,7 @@
       align-items: center;
       gap: 6px;
       opacity: 0.4;
+      cursor: pointer;
       animation: arrowBounce 2.4s ease-in-out infinite;
     }
 
@@ -541,6 +542,10 @@
         reader.appendChild(div);
       });
     }
+
+    document.getElementById('scroll-arrow').addEventListener('click', () => {
+      document.getElementById('reader').scrollIntoView({ behavior: 'smooth' });
+    });
 
     document.fonts.ready.then(initBook);
   </script>
