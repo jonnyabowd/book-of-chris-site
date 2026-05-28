@@ -522,7 +522,7 @@
     function positionReader() {
       const arrow = document.getElementById('scroll-arrow');
       const currentTop = arrow.getBoundingClientRect().top + window.scrollY;
-      const targetTop = window.innerHeight - arrow.offsetHeight - 32;
+      const targetTop = window.innerHeight - arrow.offsetHeight - 32 - (window.innerHeight * 0.1);
       const margin = Math.max(targetTop - currentTop, 24);
       arrow.style.marginTop = margin + 'px';
       document.getElementById('reader').style.marginTop = '140px';
