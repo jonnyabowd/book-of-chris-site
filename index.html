@@ -66,7 +66,7 @@
 
     #book-container {
       width: 100%;
-      max-width: 400px;
+      max-width: 900px;
       margin: 0 auto;
       filter: drop-shadow(0 11px 8px rgba(0,0,0,0.12));
       overflow: hidden;
@@ -106,11 +106,11 @@
       position: absolute;
       top: 0;
       left: 0;
-      width: calc(100% / 0.4);
+      width: calc(100% / 0.7);
       padding: 40px 36px;
       display: flex;
       flex-direction: column;
-      transform: scale(0.4);
+      transform: scale(0.7);
       transform-origin: top left;
     }
 
@@ -176,8 +176,8 @@
 
     /* Cover pages */
     .page-cover {
-      background: #2c2416;
-      color: #f5f0e8;
+      background: #ffffff;
+      color: #2a2a2a;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -185,6 +185,41 @@
       height: 100%;
       overflow: hidden;
       position: relative;
+      box-shadow: inset -8px 0 20px rgba(0,0,0,0.08), inset 8px 0 16px rgba(0,0,0,0.12);
+    }
+
+    /* Spine effect on front cover */
+    .page-cover::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: 18px;
+      background: linear-gradient(to right, rgba(0,0,0,0.18), rgba(0,0,0,0.04), transparent);
+      z-index: 3;
+      pointer-events: none;
+    }
+
+    /* Page edges on right side */
+    .page-cover::after {
+      content: '';
+      position: absolute;
+      top: 4px;
+      right: -6px;
+      bottom: 4px;
+      width: 10px;
+      background: repeating-linear-gradient(
+        to bottom,
+        #e8e0d0 0px,
+        #e8e0d0 1px,
+        #f5f0e8 1px,
+        #f5f0e8 3px
+      );
+      border-radius: 0 2px 2px 0;
+      box-shadow: 2px 0 6px rgba(0,0,0,0.15);
+      z-index: 3;
+      pointer-events: none;
     }
 
     .page-cover .cover-inner {
@@ -350,8 +385,8 @@
       <!-- Front Cover -->
       <div class="page page-cover" data-density="hard">
         <div class="cover-inner">
-          <h2><em>The</em> Book<br><em>of</em> Chris T.</h2>
-          <p class="cover-sub">Content Writer, Designer, Strategist</p>
+          <img src="images/book-of-chris.png" style="width:160%;margin-bottom:16px;">
+          <p class="cover-sub" style="color:#2a2a2a;font-size:0.7rem;opacity:1;">Content Writer, Designer, Strategist</p>
         </div>
       </div>
 
@@ -468,10 +503,13 @@
     </div>
   </div>
 
-  <div class="book-nav">
+  <div class="book-nav" id="book-nav">
     <button onclick="pageFlip.flipPrev()">&#8592; Prev</button>
     <span id="page-info">Page 1</span>
     <button onclick="pageFlip.flipNext()">Next &#8594;</button>
+  </div>
+  <div id="open-cta" style="display:none; text-align:center; margin-top:20px;">
+    <button onclick="pageFlip.flipNext()" style="background:none;border:none;font-family:'Crimson Text',serif;font-size:1.2rem;font-style:italic;color:#555;cursor:pointer;letter-spacing:0.05em;">Open and read &rarr;</button>
   </div>
   </div>
 
@@ -497,7 +535,7 @@
         flippingTime: 800,
         drawShadow: true,
         maxShadowOpacity: 1,
-        startPage: 1,
+        startPage: 0,
       });
 
       pageFlip.loadFromHTML(document.querySelectorAll('.page'));
@@ -512,10 +550,17 @@
         return `Page ${index} of ${contentPages}`;
       }
 
-      document.getElementById('page-info').textContent = pageLabel(pageFlip.getCurrentPageIndex());
+      function updateNav(index) {
+        const isCover = index === 0;
+        document.getElementById('book-nav').style.display = isCover ? 'none' : 'flex';
+        document.getElementById('open-cta').style.display = isCover ? 'block' : 'none';
+        document.getElementById('page-info').textContent = pageLabel(index);
+      }
+
+      updateNav(pageFlip.getCurrentPageIndex());
 
       pageFlip.on('flip', (e) => {
-        document.getElementById('page-info').textContent = pageLabel(e.data);
+        updateNav(e.data);
       });
 
       populateReader();
