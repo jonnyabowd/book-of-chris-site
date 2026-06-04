@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Case Studies — Chris Trotter</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body::after {
+      content: '';
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n' x='0' y='0'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.18'/%3E%3C/svg%3E");
+      mix-blend-mode: multiply;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    body {
+      font-family: 'Crimson Text', serif;
+      background: #f5f0e8;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0 16px 80px;
+    }
+
+    header {
+      width: 100%;
+      max-width: 720px;
+      padding: 48px 0 12px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 2.2rem;
+      color: #2a2a2a;
+      text-shadow: 0 -1px 1px rgba(0,0,0,0.2), 0 1px 2px rgba(255,255,255,0.8);
+      margin-bottom: 6px;
+    }
+
+    header .subtitle {
+      font-size: 1rem;
+      color: #999;
+      font-style: italic;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-top: 20px;
+      font-size: 0.95rem;
+      color: #555;
+      text-decoration: none;
+      border: 1.5px solid #999;
+      border-radius: 999px;
+      padding: 6px 18px;
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
+    }
+
+    .back-link:hover {
+      background: #2c2416;
+      color: #f5f0e8;
+      border-color: #2c2416;
+    }
+
+    .case-studies {
+      width: 100%;
+      max-width: 720px;
+      margin-top: 48px;
+      display: flex;
+      flex-direction: column;
+      gap: 64px;
+    }
+
+    .case-study {
+      border-top: 1px solid #e0d9cc;
+      padding-top: 32px;
+    }
+
+    .case-study-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 10px;
+    }
+
+    .case-study h2 {
+      font-size: 1.9rem;
+      color: #2a2a2a;
+      margin-bottom: 6px;
+      line-height: 1.25;
+    }
+
+    .case-study .tagline {
+      font-size: 1.1rem;
+      font-style: italic;
+      color: #888;
+      margin-bottom: 28px;
+    }
+
+    .summary {
+      font-size: 1.15rem;
+      line-height: 1.9;
+      color: #333;
+      margin-bottom: 32px;
+    }
+
+    .section {
+      margin-bottom: 28px;
+    }
+
+    .section h3 {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #999;
+      border-bottom: 1px solid #e0d9cc;
+      padding-bottom: 8px;
+      margin-bottom: 16px;
+    }
+
+    .section ul {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .section ul li {
+      font-size: 1.15rem;
+      line-height: 1.75;
+      color: #333;
+      padding-left: 1.2em;
+      position: relative;
+    }
+
+    .section ul li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: #c8b99a;
+    }
+
+    .result-stat {
+      font-size: 1.15rem;
+      font-style: italic;
+      color: #555;
+      border-left: 2px solid #c8b99a;
+      padding-left: 20px;
+      margin-top: 20px;
+      line-height: 1.75;
+    }
+
+    /* Carousel */
+    .carousel {
+      position: relative;
+      width: 100%;
+      background: #2c2416;
+      border-radius: 6px;
+      overflow: hidden;
+      margin-bottom: 32px;
+      user-select: none;
+    }
+
+    .carousel-track {
+      display: flex;
+      transition: transform 0.35s ease;
+    }
+
+    .carousel-track img {
+      flex: 0 0 100%;
+      width: 100%;
+      max-height: 480px;
+      object-fit: contain;
+      display: block;
+    }
+
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(44,36,22,0.7);
+      border: none;
+      color: #f5f0e8;
+      font-size: 1.4rem;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+      z-index: 10;
+    }
+
+    .carousel-btn:hover { background: rgba(44,36,22,0.95); }
+    .carousel-btn.prev { left: 10px; }
+    .carousel-btn.next { right: 10px; }
+
+    .carousel-dots {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      padding: 10px 0;
+    }
+
+    .carousel-dots span {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #c8b99a;
+      opacity: 0.35;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+
+    .carousel-dots span.active { opacity: 1; }
+
+    .carousel-counter {
+      position: absolute;
+      bottom: 44px;
+      right: 12px;
+      font-size: 0.75rem;
+      color: rgba(245,240,232,0.7);
+      font-family: 'Crimson Text', serif;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1><em>Case Studies</em></h1>
+    <p class="subtitle">Google Wallet — UX Content Strategy</p>
+    <a href="index.html" class="back-link">← Back to the Book</a>
+  </header>
+
+  <div class="case-studies">
+
+    <!-- Case Study 1 -->
+    <div class="case-study">
+      <p class="case-study-label">Case Study 01</p>
+      <h2>Google Wallet Redesign</h2>
+      <p class="tagline">Scaling strategy for a global relaunch: How one UX Content Lead redesigned the Google Wallet ecosystem in 12 months.</p>
+
+      <div class="carousel" id="carousel-1">
+        <div class="carousel-track">
+          <img src="images/portfolio/img-017.jpg" alt="Your Secure Digital Wallet, Backed by Google">
+          <img src="images/portfolio/img-020.jpg" alt="A faster, safer, easier way to pay">
+          <img src="images/portfolio/img-023.jpg" alt="With Google Wallet, you're in control of your data">
+          <img src="images/portfolio/img-026.jpg" alt="Get ready to tap to pay — onboarding">
+          <img src="images/portfolio/img-029.jpg" alt="Unlock your phone and hold it to the reader">
+          <img src="images/portfolio/img-032.jpg" alt="Add a card to get started">
+          <img src="images/portfolio/img-035.jpg" alt="Tap to pay everywhere you see these symbols">
+          <img src="images/portfolio/img-038.jpg" alt="You're done when you see the checkmark">
+          <img src="images/portfolio/img-041.jpg" alt="Add to Wallet screen">
+          <img src="images/portfolio/img-044.jpg" alt="Add a payment card">
+          <img src="images/portfolio/img-053.jpg" alt="A safer way to pay">
+          <img src="images/portfolio/img-056.jpg" alt="Pay more securely everywhere">
+          <img src="images/portfolio/img-059.jpg" alt="Breeze through checkout">
+        </div>
+        <button class="carousel-btn prev" onclick="slide('carousel-1', -1)">&#8592;</button>
+        <button class="carousel-btn next" onclick="slide('carousel-1', 1)">&#8594;</button>
+        <div class="carousel-counter" id="carousel-1-counter">1 / 13</div>
+        <div class="carousel-dots" id="carousel-1-dots"></div>
+      </div>
+
+      <p class="summary">In 2022, Google underwent a massive strategic shift, transitioning Google Pay into Google Wallet — a comprehensive digital home for payments, IDs, transit, and more. The mission: redesign the entire app experience from the ground up, in one year, with a 10:1 designer-to-writer ratio.</p>
+
+      <div class="section">
+        <h3>The Challenge</h3>
+        <ul>
+          <li><strong>Content debt</strong> — The legacy app had fragmented terminology across payments and loyalty. We weren't just changing a logo; we were redefining the mental model of a "Wallet."</li>
+          <li><strong>Scaling problem</strong> — With a 10:1 designer-to-writer ratio, I couldn't be in every Figma file. I had to pivot from "writing strings" to "building systems."</li>
+          <li><strong>Regulatory maze</strong> — Financial and identity data require extreme precision. Every word had to pass through rigorous Legal and Privacy reviews within the 12-month window.</li>
+          <li><strong>Global product</strong> — A true localization challenge: creating a product that works across 80+ countries.</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h3>The Strategy</h3>
+        <ul>
+          <li><strong>Northstar nomenclature</strong> — Created a "Source of Truth" terminology database. Instead of debating "Pass" vs. "Card" vs. "Ticket" in 6 different meetings, I established global nomenclature early to ensure consistency.</li>
+          <li><strong>Content design system</strong> — Built content patterns and "Self-Service Guidelines" for designers, empowering them to use the right voice in early mocks so I could focus on high-risk flows like Identity Verification and Privacy Onboarding.</li>
+          <li><strong>Legal fast-track process</strong> — Streamlined review by grouping strings by "Risk Level," allowing Legal to skip low-risk UI and focus on high-stakes compliance content.</li>
+          <li><strong>Eng handoff process</strong> — With 1,000+ screens at high velocity, created a new process with Engineering to ensure the right strings made it into code.</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h3>The Result</h3>
+        <ul>
+          <li><strong>On-time delivery</strong> — Successfully launched a complete redesign within the 12-month window.</li>
+          <li><strong>Operational excellence</strong> — Maintained high content quality and global consistency despite the 10:1 ratio.</li>
+          <li><strong>Global scale</strong> — The nomenclature and frameworks now support Google Wallet in 70+ countries.</li>
+          <li><strong>Lasting process</strong> — The Figma design process and content matrices built during this project are still in use today.</li>
+        </ul>
+        <p class="result-stat">360 million monthly active users across 80+ countries — a 35% increase from the previous app.</p>
+      </div>
+    </div>
+
+    <!-- Case Study 2 -->
+    <div class="case-study">
+      <p class="case-study-label">Case Study 02</p>
+      <h2>Paris Olympics Visa Campaign</h2>
+      <p class="tagline">Gamifying the global transaction: How we brought the Paris 2024 Olympic spirit to every Google Wallet tap.</p>
+
+      <div class="carousel" id="carousel-2">
+        <div class="carousel-track">
+          <img src="images/portfolio/img-060.jpg" alt="Paris 2024 mascots with phone mockup">
+          <img src="images/portfolio/img-074.jpg" alt="Earn the Paris 2024 Mascots in-app screen">
+          <img src="images/portfolio/img-071.jpg" alt="Campaign rules screen">
+          <img src="images/portfolio/img-078.jpg" alt="Earn Paris 2024 mascots notification">
+          <img src="images/portfolio/img-081.jpg" alt="Welcome email">
+        </div>
+        <button class="carousel-btn prev" onclick="slide('carousel-2', -1)">&#8592;</button>
+        <button class="carousel-btn next" onclick="slide('carousel-2', 1)">&#8594;</button>
+        <div class="carousel-counter" id="carousel-2-counter">1 / 5</div>
+        <div class="carousel-dots" id="carousel-2-dots"></div>
+      </div>
+
+      <p class="summary">To celebrate the Paris 2024 Olympic and Paralympic Games, Google partnered with Visa to create a first-of-its-kind "Tap to Pay" loyalty experience. Users earned 6 exclusive digital Mascot Doodles (The Phryges) by using their Visa card for everyday purchases — rolled out across 20+ countries to every eligible Google Wallet user.</p>
+
+      <div class="section">
+        <h3>The Challenge</h3>
+        <ul>
+          <li><strong>Strict brand guidelines</strong> — Had to navigate Visa's exacting brand requirements alongside the IOC's rigid rules on Olympic imagery and terminology.</li>
+          <li><strong>Terminology sensitivity</strong> — "Winning," "Medals," and "Official" are legally protected terms in an Olympic context. The content strategy had to feel exciting while being 100% compliant.</li>
+          <li><strong>Content volume</strong> — Wrote the end-to-end journey — from opt-in and legal disclosures to celebratory Tap Doodles and milestone notifications — for millions of simultaneous users.</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h3>The Strategy</h3>
+        <ul>
+          <li><strong>Pre-approved terminology bank</strong> — Got Visa's legal team to sign off on core phrases early (e.g., "Collect digital mascots" vs. "Win prizes"), avoiding costly late-stage rewrites.</li>
+          <li><strong>Scannable T&Cs</strong> — Redesigned the Terms & Conditions experience with clear headers and plain language so users felt empowered to participate rather than overwhelmed.</li>
+          <li><strong>Copy meets motion</strong> — Collaborated with motion designers to ensure Tap Doodle copy perfectly matched the energy of the animations, making every transaction feel like a mini-celebration.</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h3>The Result</h3>
+        <ul>
+          <li><strong>Massive participation</strong> — Successfully scaled to millions of users, driving a significant uptick in top-of-wallet Visa usage during the Games.</li>
+          <li><strong>Zero compliance breaches</strong> — Delivered a high-velocity global campaign with 100% adherence to Visa and IOC legal standards.</li>
+          <li><strong>Contactless milestone</strong> — Contributed to a record-breaking 75% of transactions at the Paris Games being contactless.</li>
+        </ul>
+        <p class="result-stat">Roughly 5 million new monthly active users — a 15% increase.</p>
+      </div>
+    </div>
+
+    <!-- Case Study 3 -->
+    <div class="case-study">
+      <p class="case-study-label">Case Study 03</p>
+      <h2>Google Wallet × TfL "Tap and Go"</h2>
+      <p class="tagline">Bridging the Atlantic: Leading the content strategy for the Google Wallet × TfL London awareness campaign.</p>
+
+      <div class="carousel" id="carousel-3">
+        <div class="carousel-track">
+          <img src="images/portfolio/img-087.jpg" alt="Take the Google Pay Tube Challenge in-app">
+          <img src="images/portfolio/img-101.jpg" alt="Transport for London Facebook post">
+          <img src="images/portfolio/img-098.jpg" alt="TfL Tube Challenge screen">
+          <img src="images/portfolio/img-104.jpg" alt="Google Pay Tube Challenge prize screens">
+          <img src="images/portfolio/img-107.jpg" alt="TfL station badges">
+        </div>
+        <button class="carousel-btn prev" onclick="slide('carousel-3', -1)">&#8592;</button>
+        <button class="carousel-btn next" onclick="slide('carousel-3', 1)">&#8594;</button>
+        <div class="carousel-counter" id="carousel-3-counter">1 / 5</div>
+        <div class="carousel-dots" id="carousel-3-dots"></div>
+      </div>
+
+      <p class="summary">In 2023, Google Wallet partnered with Transport for London (TfL) to solve a persistent user friction: many commuters still believed they needed a physical Oyster card to navigate the city. The mission was to drive awareness that users could simply "Tap and Go" with Google Wallet across the entire TfL network — spanning OOH displays, social media, and in-app educational content.</p>
+
+      <div class="section">
+        <h3>The Challenge</h3>
+        <ul>
+          <li><strong>Geographic gap</strong> — Leading a London-centric campaign from San Francisco required deep empathy for the local commuter's journey without being able to walk the Tube lines myself.</li>
+          <li><strong>Brand synergy vs. friction</strong> — TfL's brand is one of the most protected in the world. Balancing Google's "Helpful & Fast" voice with TfL's "Authoritative & Historic" guidelines required constant calibration.</li>
+          <li><strong>High-stakes legal risk</strong> — Served as the primary liaison between Google Legal and TfL to prevent promotional gaming and ensure a bulletproof global campaign.</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h3>The Strategy</h3>
+        <ul>
+          <li><strong>Fact-checking matrix</strong> — Built a collaborative system between Google's London teams and TfL's internal historians, ensuring accuracy was locally sourced and globally approved.</li>
+          <li><strong>Mental model shift</strong> — Pivoted copy from technical instructions to a simple, repetitive value prop: "No Oyster? No problem. Just tap and go."</li>
+          <li><strong>Shared language document</strong> — Turned brand guidelines into a bridge rather than a hurdle, allowing design teams in SF and London to move faster from Day 1.</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h3>The Result</h3>
+        <ul>
+          <li><strong>Awareness spike</strong> — Contributed to contactless payments now accounting for over 70% of all pay-as-you-go journeys on London buses and rail.</li>
+          <li><strong>Global standard</strong> — The "Tap and Go" content framework built for London is now the blueprint for Google Wallet's transit launches in 500+ cities globally.</li>
+        </ul>
+        <p class="result-stat">Roughly 2.5 million new monthly active users in London — a 12% increase.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    const state = {};
+
+    function initCarousel(id) {
+      const carousel = document.getElementById(id);
+      const imgs = carousel.querySelectorAll('.carousel-track img');
+      const total = imgs.length;
+      state[id] = { index: 0, total };
+
+      const dotsEl = document.getElementById(id + '-dots');
+      for (let i = 0; i < total; i++) {
+        const dot = document.createElement('span');
+        if (i === 0) dot.classList.add('active');
+        dot.addEventListener('click', () => goTo(id, i));
+        dotsEl.appendChild(dot);
+      }
+
+      // Swipe support
+      let startX = null;
+      carousel.addEventListener('touchstart', e => { startX = e.touches[0].clientX; });
+      carousel.addEventListener('touchend', e => {
+        if (startX === null) return;
+        const diff = startX - e.changedTouches[0].clientX;
+        if (Math.abs(diff) > 40) slide(id, diff > 0 ? 1 : -1);
+        startX = null;
+      });
+    }
+
+    function goTo(id, index) {
+      const s = state[id];
+      s.index = (index + s.total) % s.total;
+      const carousel = document.getElementById(id);
+      carousel.querySelector('.carousel-track').style.transform = `translateX(-${s.index * 100}%)`;
+      document.getElementById(id + '-counter').textContent = `${s.index + 1} / ${s.total}`;
+      carousel.querySelectorAll('.carousel-dots span').forEach((d, i) => {
+        d.classList.toggle('active', i === s.index);
+      });
+    }
+
+    function slide(id, dir) {
+      goTo(id, state[id].index + dir);
+    }
+
+    initCarousel('carousel-1');
+    initCarousel('carousel-2');
+    initCarousel('carousel-3');
+  </script>
+
+</body>
+</html>

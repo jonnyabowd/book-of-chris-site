@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Capital One — Chris Trotter</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body::after {
+      content: '';
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n' x='0' y='0'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.18'/%3E%3C/svg%3E");
+      mix-blend-mode: multiply;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    body {
+      font-family: 'Crimson Text', serif;
+      background: #f5f0e8;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0 16px 80px;
+    }
+
+    header {
+      width: 100%;
+      max-width: 720px;
+      padding: 48px 0 12px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 2.2rem;
+      color: #2a2a2a;
+      text-shadow: 0 -1px 1px rgba(0,0,0,0.2), 0 1px 2px rgba(255,255,255,0.8);
+      margin-bottom: 6px;
+    }
+
+    header .subtitle {
+      font-size: 1rem;
+      color: #999;
+      font-style: italic;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-top: 20px;
+      font-size: 0.95rem;
+      color: #555;
+      text-decoration: none;
+      border: 1.5px solid #999;
+      border-radius: 999px;
+      padding: 6px 18px;
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
+    }
+
+    .back-link:hover {
+      background: #2c2416;
+      color: #f5f0e8;
+      border-color: #2c2416;
+    }
+
+    .case-studies {
+      width: 100%;
+      max-width: 720px;
+      margin-top: 48px;
+      display: flex;
+      flex-direction: column;
+      gap: 64px;
+    }
+
+    .case-study {
+      border-top: 1px solid #e0d9cc;
+      padding-top: 32px;
+    }
+
+    .case-study-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 10px;
+    }
+
+    .case-study h2 {
+      font-size: 1.9rem;
+      color: #2a2a2a;
+      margin-bottom: 6px;
+      line-height: 1.25;
+    }
+
+    .case-study .tagline {
+      font-size: 1.1rem;
+      font-style: italic;
+      color: #888;
+      margin-bottom: 28px;
+    }
+
+    .summary {
+      font-size: 1.15rem;
+      line-height: 1.9;
+      color: #333;
+      margin-bottom: 32px;
+    }
+
+    .section {
+      margin-bottom: 28px;
+    }
+
+    .section h3 {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #999;
+      border-bottom: 1px solid #e0d9cc;
+      padding-bottom: 8px;
+      margin-bottom: 16px;
+    }
+
+    .section ul {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .section ul li {
+      font-size: 1.15rem;
+      line-height: 1.75;
+      color: #333;
+      padding-left: 1.2em;
+      position: relative;
+    }
+
+    .section ul li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: #c8b99a;
+    }
+
+    .result-stat {
+      font-size: 1.15rem;
+      font-style: italic;
+      color: #555;
+      border-left: 2px solid #c8b99a;
+      padding-left: 20px;
+      margin-top: 20px;
+      line-height: 1.75;
+    }
+
+    /* Carousel */
+    .carousel {
+      position: relative;
+      width: 100%;
+      background: #2c2416;
+      border-radius: 6px;
+      overflow: hidden;
+      margin-bottom: 32px;
+      user-select: none;
+    }
+
+    .carousel-track {
+      display: flex;
+      transition: transform 0.35s ease;
+    }
+
+    .carousel-track img {
+      flex: 0 0 100%;
+      width: 100%;
+      max-height: 480px;
+      object-fit: contain;
+      display: block;
+    }
+
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(44,36,22,0.7);
+      border: none;
+      color: #f5f0e8;
+      font-size: 1.4rem;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+      z-index: 10;
+    }
+
+    .carousel-btn:hover { background: rgba(44,36,22,0.95); }
+    .carousel-btn.prev { left: 10px; }
+    .carousel-btn.next { right: 10px; }
+
+    .carousel-dots {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      padding: 10px 0;
+    }
+
+    .carousel-dots span {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #c8b99a;
+      opacity: 0.35;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+
+    .carousel-dots span.active { opacity: 1; }
+
+    .carousel-counter {
+      position: absolute;
+      bottom: 44px;
+      right: 12px;
+      font-size: 0.75rem;
+      color: rgba(245,240,232,0.7);
+      font-family: 'Crimson Text', serif;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1><em>Capital One</em></h1>
+    <p class="subtitle">UX Content Design Strategist — June 2015 to May 2017</p>
+    <a href="index.html" class="back-link">← Back to the Book</a>
+  </header>
+
+  <div class="case-studies">
+
+    <!-- Case Study 1: Auto Loan Tracker -->
+    <div class="case-study">
+      <p class="case-study-label">Deep Dive 01</p>
+      <h2>Auto Loan Tracker</h2>
+      <p class="tagline">What you talkin' 'bout — balance? Reimagining the Capital One auto loan experience to help customers understand where they stood and prevent end-of-loan surprises.</p>
+
+      <div class="carousel" id="carousel-1">
+        <div class="carousel-track">
+          <img src="images/capital-one/img-000.png" alt="Whiteboard flow diagram — Auto Refinance process">
+          <img src="images/capital-one/img-048.png" alt="Content strategy post-it wall">
+          <img src="images/capital-one/img-101.jpg" alt="Empathy research post-it wall">
+          <img src="images/capital-one/img-050.png" alt="Content mapping layout">
+          <img src="images/capital-one/img-070.jpg" alt="Know / Feel / Find / Act content framework">
+          <img src="images/capital-one/img-002.png" alt="Auto Refinance app — before (old web form)">
+          <img src="images/capital-one/img-004.png" alt="Application details — before">
+          <img src="images/capital-one/img-006.png" alt="Auto Refinance app — after (redesigned mobile)">
+        </div>
+        <button class="carousel-btn prev" onclick="slide('carousel-1', -1)">&#8592;</button>
+        <button class="carousel-btn next" onclick="slide('carousel-1', 1)">&#8594;</button>
+        <div class="carousel-counter" id="carousel-1-counter">1 / 8</div>
+        <div class="carousel-dots" id="carousel-1-dots"></div>
+      </div>
+
+      <p class="summary">Users who paid late on their Capital One auto loans could end up with an unexpected balance at the end of their loan term — money that was rarely recovered and created a terrible customer experience. The ask: help users understand where they stood with their loan and stop the end-of-term surprise before it happened.</p>
+
+      <div class="section">
+        <h3>The Problem</h3>
+        <ul>
+          <li><strong>User confusion</strong> — Customers didn't understand how simple interest loans worked, leading to late payments and surprise end-of-loan balances.</li>
+          <li><strong>Clunky experience</strong> — The existing tracker was confusing, long-winded, and lacking empathy for customers who were behind.</li>
+          <li><strong>Business impact</strong> — Unpaid end-of-loan balances meant lost revenue and lost future customers.</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h3>My Process</h3>
+        <ul>
+          <li><strong>Gain insight</strong> — Empathy research, market research, user testing, and baseline content testing to understand the real problem.</li>
+          <li><strong>Define the problem</strong> — Research analysis, needs analysis, and "How might we…" questions to frame the opportunity.</li>
+          <li><strong>Define the audience</strong> — Who are our customers? What do they like, hate, need, and fear? What makes them tick?</li>
+          <li><strong>Content audit</strong> — Assessed what we were currently communicating: was it empathetic, clear, and contextually relevant? Did it follow the three principles — Natural Language, Contextually Relevant, Use Case Specific?</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h3>The Strategy</h3>
+        <ul>
+          <li><strong>Reimagine the entire experience</strong> — New user flows, new UI, new interaction treatments, and entirely new content.</li>
+          <li><strong>Know / Feel / Find / Act framework</strong> — Built a content framework to ensure every message answered what users needed to know, how we wanted them to feel, what they were looking for, and what we wanted them to do.</li>
+          <li><strong>Empathetic language</strong> — Rewrote all content to be warm and encouraging when customers were ahead, and clear and supportive when they were behind — never shaming.</li>
+          <li><strong>Simple interest education</strong> — Created an explainer video and in-app tips to help customers understand how their loan actually worked.</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h3>The Result</h3>
+        <ul>
+          <li><strong>15,000 customers</strong> paid ahead at least 2 months within the first 3 months.</li>
+          <li><strong>11% decrease</strong> in call center volume.</li>
+          <li><strong>80,000 new on-time customers</strong> added to the books.</li>
+          <li><strong>5-point NPS bump</strong> — and glowing customer feedback.</li>
+        </ul>
+        <p class="result-stat">"I love the advice about paying the loan off." / "I love that I can see my 10-day payoff on the app!" / "WOOP WOOP... PAID IN FULL."</p>
+      </div>
+    </div>
+
+    <!-- Case Study 2: Feedback Tracker -->
+    <div class="case-study">
+      <p class="case-study-label">Deep Dive 02</p>
+      <h2>Feedback Tracker</h2>
+      <p class="tagline">From generic surveys to targeted insight: Redesigning how Capital One collected customer feedback — then scaling the heck out of it.</p>
+
+      <div class="carousel" id="carousel-2">
+        <div class="carousel-track">
+          <img src="images/capital-one/img-068.png" alt="Content strategy methods survey results">
+          <img src="images/capital-one/img-056.png" alt="Auto Navigator landing page">
+          <img src="images/capital-one/img-048.png" alt="Content strategy post-it wall — process">
+        </div>
+        <button class="carousel-btn prev" onclick="slide('carousel-2', -1)">&#8592;</button>
+        <button class="carousel-btn next" onclick="slide('carousel-2', 1)">&#8594;</button>
+        <div class="carousel-counter" id="carousel-2-counter">1 / 3</div>
+        <div class="carousel-dots" id="carousel-2-dots"></div>
+      </div>
+
+      <p class="summary">Capital One was collecting feedback — but not the right kind. Responses were generic, lacked context, and couldn't be tied to any specific feature. The ask: build a targeted feedback system for a new mobile feature, use it to quickly address customer concerns and reduce call volume, then scale it across the product.</p>
+
+      <div class="section">
+        <h3>The Problem</h3>
+        <ul>
+          <li><strong>Low-quality feedback</strong> — Users were providing little feedback, and what they did share lacked enough context to act on.</li>
+          <li><strong>No feature attribution</strong> — Couldn't tie feedback to specific parts of the product, making it impossible to prioritize fixes.</li>
+          <li><strong>Survey fatigue</strong> — Existing NPS questions were long, clinical, and easy to ignore.</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h3>The Strategy</h3>
+        <ul>
+          <li><strong>Content audit first</strong> — Analyzed the existing NPS questions for clarity, empathy, and relevance before designing anything new.</li>
+          <li><strong>Contextual triggers</strong> — Designed feedback prompts that fired at the right moment in the right feature, so responses were always tied to a specific experience.</li>
+          <li><strong>Conversational language</strong> — Rewrote survey copy using natural, human language that felt like a quick conversation rather than a formal questionnaire.</li>
+          <li><strong>Scalable system</strong> — Built a reusable feedback framework that could be dropped into any feature — then scaled it across the product.</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h3>The Result</h3>
+        <ul>
+          <li><strong>Higher response rates</strong> — Contextual, conversational prompts dramatically increased the volume of usable feedback.</li>
+          <li><strong>Actionable insight</strong> — Product teams could now tie specific feedback to specific features and make faster, data-driven decisions.</li>
+          <li><strong>Scalable blueprint</strong> — The framework became the standard feedback model rolled out across Capital One's mobile product suite.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Case Study 3: Auto Refinance & Navigator -->
+    <div class="case-study">
+      <p class="case-study-label">Additional Work</p>
+      <h2>Auto Refinance & Auto Navigator</h2>
+      <p class="tagline">Content-first design for Capital One's auto finance products — from conversation prototypes to landing page copy.</p>
+
+      <div class="carousel" id="carousel-3">
+        <div class="carousel-track">
+          <img src="images/capital-one/img-006.png" alt="Auto Refinance app — redesigned mobile flow">
+          <img src="images/capital-one/img-002.png" alt="Auto Refinance — before (legacy web form)">
+          <img src="images/capital-one/img-004.png" alt="Application details — before">
+          <img src="images/capital-one/img-056.png" alt="Auto Navigator landing page">
+          <img src="images/capital-one/img-000.png" alt="Whiteboard process — refinance flow planning">
+        </div>
+        <button class="carousel-btn prev" onclick="slide('carousel-3', -1)">&#8592;</button>
+        <button class="carousel-btn next" onclick="slide('carousel-3', 1)">&#8594;</button>
+        <div class="carousel-counter" id="carousel-3-counter">1 / 5</div>
+        <div class="carousel-dots" id="carousel-3-dots"></div>
+      </div>
+
+      <p class="summary">Across Capital One's auto finance suite, the challenge was the same: complex financial products wrapped in jargon-heavy, intimidating language. The work involved building conversation prototypes, co-creating content workbooks with design and product, and rewriting everything from application flows to landing pages using plain, human language.</p>
+
+      <div class="section">
+        <h3>The Approach</h3>
+        <ul>
+          <li><strong>Content-first design</strong> — Worked from conversation prototypes before screens were built, ensuring the language shaped the experience rather than being squeezed in at the end.</li>
+          <li><strong>Content workbooks</strong> — Co-created workbooks with designers and PMs defining conversation structure, ideal phrases, and navigation patterns for each flow.</li>
+          <li><strong>Auto Navigator copy</strong> — Wrote and optimized landing page content for Capital One's Auto Navigator — a pre-qualification tool designed to feel low-risk and approachable for shoppers.</li>
+          <li><strong>Plain language rewrites</strong> — Transformed dense legal and financial copy into clear, friendly language that reflected how real customers talked about their money.</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    const state = {};
+
+    function initCarousel(id) {
+      const carousel = document.getElementById(id);
+      const imgs = carousel.querySelectorAll('.carousel-track img');
+      const total = imgs.length;
+      state[id] = { index: 0, total };
+
+      const dotsEl = document.getElementById(id + '-dots');
+      for (let i = 0; i < total; i++) {
+        const dot = document.createElement('span');
+        if (i === 0) dot.classList.add('active');
+        dot.addEventListener('click', () => goTo(id, i));
+        dotsEl.appendChild(dot);
+      }
+
+      let startX = null;
+      carousel.addEventListener('touchstart', e => { startX = e.touches[0].clientX; });
+      carousel.addEventListener('touchend', e => {
+        if (startX === null) return;
+        const diff = startX - e.changedTouches[0].clientX;
+        if (Math.abs(diff) > 40) slide(id, diff > 0 ? 1 : -1);
+        startX = null;
+      });
+    }
+
+    function goTo(id, index) {
+      const s = state[id];
+      s.index = (index + s.total) % s.total;
+      const carousel = document.getElementById(id);
+      carousel.querySelector('.carousel-track').style.transform = `translateX(-${s.index * 100}%)`;
+      document.getElementById(id + '-counter').textContent = `${s.index + 1} / ${s.total}`;
+      carousel.querySelectorAll('.carousel-dots span').forEach((d, i) => {
+        d.classList.toggle('active', i === s.index);
+      });
+    }
+
+    function slide(id, dir) {
+      goTo(id, state[id].index + dir);
+    }
+
+    initCarousel('carousel-1');
+    initCarousel('carousel-2');
+    initCarousel('carousel-3');
+  </script>
+
+</body>
+</html>
