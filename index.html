@@ -70,6 +70,12 @@
       margin: 0 auto;
       filter: drop-shadow(0 11px 8px rgba(0,0,0,0.12));
       overflow: hidden;
+      display: flex;
+      justify-content: center;
+    }
+
+    #book {
+      margin: 0 auto;
     }
 
     /* Page outer shell — StPageFlip sizes these */
@@ -110,49 +116,113 @@
       padding: 40px 36px;
       display: flex;
       flex-direction: column;
+      align-items: flex-start;
+      text-align: left;
       transform: scale(0.7);
       transform-origin: top left;
     }
 
+    .page-inner h2,
+    .page-inner p,
+    .page-inner ul,
+    .page-inner ul li,
+    .page-inner ul li strong,
+    .page-inner ul li span {
+      text-align: left;
+    }
+
+    /* Tablet */
+    @media (max-width: 900px) {
+      #book-container { max-width: 100%; }
+      .page-inner {
+        width: calc(100% / 0.55);
+        transform: scale(0.55);
+      }
+    }
+
+    /* Mobile */
+    @media (max-width: 600px) {
+      #book-container { max-width: 100%; }
+      .page-inner {
+        width: calc(100% / 0.4);
+        transform: scale(0.4);
+      }
+      h1 { font-size: 1.6rem; }
+      .book-nav button { padding: 6px 14px; font-size: 0.9rem; }
+    }
+
 
     .page-inner h2 {
-      font-size: 0.72rem;
+      font-size: 1.1rem;
       font-weight: 600;
-      letter-spacing: 0.2em;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: #999;
-      border-bottom: 1px solid #e0d9cc;
+      color: #2a2a2a;
+      border-bottom: 2px solid #2a2a2a;
       padding-bottom: 10px;
       margin-bottom: 20px;
+      text-align: left;
+      width: 100%;
     }
 
     .page-inner .reader-only { display: none !important; }
     .reader-page .book-only { display: none !important; }
     .reader-page .reader-only { height: auto !important; }
-    .reader-page .reader-only img { max-height: none; width: 100%; }
+    .reader-page .reader-only img { height: 100px; width: 300px; display: block; margin: 0 auto 16px; object-fit: contain; }
     .reader-page .img-container { height: auto !important; }
-    .reader-page .img-container img { max-height: none; max-width: 100%; width: 100%; }
+    .reader-page .img-container img { max-height: 200px; max-width: 100%; width: auto; display: block; margin: 0 auto; }
     .reader-page .img-container-70 img { width: 70% !important; display: block; margin: 0 auto; }
 
     .page-inner p {
-      font-size: 0.95rem;
+      font-size: 1.15rem;
       line-height: 1.7;
       color: #333;
-      text-align: justify;
-      text-indent: 1.5em;
+      text-align: left;
+      text-indent: 0;
       margin-bottom: 14px;
+      width: 100%;
+    }
+
+    .page-inner p em {
+      font-style: italic;
+      font-size: 1.1rem;
+      color: #444;
+      font-weight: 600;
     }
 
     .page-inner ul {
-      font-size: 0.95rem;
+      font-size: 1.15rem;
       line-height: 1.7;
       color: #333;
-      padding-left: 1.4em;
-      margin-bottom: 14px;
+      list-style: none;
+      padding: 0;
+      margin: 0 0 14px 0;
     }
 
     .page-inner ul li {
-      margin-bottom: 10px;
+      margin-bottom: 12px;
+      padding-left: 1em;
+      position: relative;
+    }
+
+    .page-inner ul li::before {
+      content: '•';
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: #2a2a2a;
+      line-height: 1.7;
+    }
+
+    .page-inner ul li strong {
+      display: block;
+      text-align: left;
+      margin-bottom: 1px;
+    }
+
+    .page-inner ul li span {
+      display: block;
+      text-align: left;
     }
 
     .page-inner blockquote {
@@ -342,7 +412,8 @@
       font-size: 1.15rem;
       line-height: 1.9;
       color: #333;
-      text-indent: 1.5em;
+      text-indent: 0;
+      text-align: left;
       margin-bottom: 16px;
     }
 
@@ -350,12 +421,29 @@
       font-size: 1.15rem;
       line-height: 1.9;
       color: #333;
-      padding-left: 1.4em;
-      margin-bottom: 16px;
+      list-style: none;
+      padding: 0;
+      margin: 0 0 16px 0;
     }
 
     .reader-page ul li {
-      margin-bottom: 10px;
+      margin-bottom: 14px;
+      padding-left: 1em;
+      position: relative;
+    }
+
+    .reader-page ul li::before {
+      content: '•';
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: #2a2a2a;
+      line-height: 1.9;
+    }
+
+    .reader-page ul li strong {
+      display: block;
+      margin-bottom: 2px;
     }
 
     .reader-page blockquote {
@@ -393,103 +481,107 @@
       <!-- Page 1 — About -->
       <div class="page">
         <div class="page-inner">
-          <h2>About</h2>
-          <div class="img-container" style="height: 200px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
-            <img src="images/IMG_0382.png" style="max-height: 100%; max-width: 50%; object-fit: contain;">
+          <h2>Chris Trotter</h2>
+          <div style="display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
+            <img src="images/IMG_0382.png" style="max-width: 50%; object-fit: contain; border-radius: 4px;">
           </div>
-          <p>Chris Trotter is a Senior UX Content Strategist with over a decade of experience in content design, user experience, and digital transformation.</p>
-          <p>Currently at Google, specializing in end-to-end content strategy for payments and identity products. Proven ability to lead user research, leverage data for decision-making, and act as a strategic partner to Product, Design, and Engineering teams.</p>
-          <p>Experienced navigating complex, regulated environments — turning legal and technical constraints into clear, human-centered experiences.</p>
+          <p><strong>Senior UX Content Strategist</strong> with 10+ years of experience leading content design for global products in highly regulated industries.</p>
+          <p>Expert at bridging the gap between complex technical requirements and intuitive user experiences. Proven track record of establishing scalable content systems and driving product strategy at Google.</p>
+          <p>Now providing specialized <strong>1099 consultancy</strong> for high-growth firms and enterprise networks.</p>
           <div class="page-number">i</div>
         </div>
       </div>
 
-      <!-- Page 2 — Google Wallet -->
+      <!-- Page 2 — Google pt. 1 -->
       <div class="page">
         <div class="page-inner">
-          <h2>Google Wallet</h2>
-          <div class="book-only" style="height: 200px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
-            <img src="images/IMG_0378.png" style="max-height: 100%; max-width: 100%; object-fit: contain;">
+          <h2>Google</h2>
+          <p><em>Senior UX Content Designer — 2017 to 2026</em></p>
+          <div class="reader-only" style="display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
+            <img src="images/IMG_0380.png" style="max-width: 100%; object-fit: contain;">
           </div>
-          <div class="reader-only" style="height: 280px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
-            <img src="images/IMG_0380.png" style="max-height: 100%; max-width: 100%; object-fit: contain;">
-          </div>
-          <p>Content lead for the 2022 re-launch of Google Wallet. Acted as a strategic product partner — not just a writer — taking full ownership of the end-to-end user journey from onboarding through complex payment and identity management.</p>
-          <p>Defined content direction and information architecture to ensure a simple, trustworthy experience in a highly regulated domain. Translated technical and legal complexities into human-centered experiences that drove adoption and conversion across global markets.</p>
-          <a href="portfolio.html" style="display:inline-block;margin-top:8px;padding:6px 16px;border:1.5px solid #999;border-radius:999px;font-family:'Crimson Text',serif;font-size:0.85rem;color:#555;text-decoration:none;">View Case Studies →</a>
+          <ul>
+            <li><strong>Google Wallet: Content lead</strong> As the sole and lead content designer for the 2022 re-launch of Google Wallet, I owned the end-to-end user journey—from initial onboarding through to complex payment and identity management—defining the content direction and choosing every word to ensure a simple, trustworthy experience in a highly regulated domain. I proactively shaped product decisions and information architecture to align with business growth goals and ensure user trust. Translated technical and legal complexities into human-centered digital experiences that drove adoption and conversion across global markets.</li>
+            <li><strong>GPay app: Content designer</strong> Acted as a key strategic partner within the GPay product team, owning the content strategy for high-impact payment features. Worked from discovery through launch to shape product flows and information architecture, ensuring that complex financial transactions felt simple and trustworthy. I utilized data and A/B testing to identify friction points and proactively proposed content-led product improvements that directly increased user trust and conversion rates.</li>
+          </ul>
           <div class="page-number">1</div>
         </div>
       </div>
 
-      <!-- Page 3 — GPay -->
+      <!-- Page 3 — Google pt. 2 -->
       <div class="page">
         <div class="page-inner">
-          <h2>Google Pay</h2>
-          <div class="img-container img-container-70" style="height: 200px; overflow: hidden; display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
-            <img src="images/IMG_0387.png" style="max-height: 100%; max-width: 100%; object-fit: contain;">
-          </div>
-          <p>Content designer for the GPay app, owning strategy for high-impact payment features. Used data and A/B testing to identify friction points and propose content-led improvements that increased user trust and conversion rates.</p>
-          <p>Led end-to-end content for the GPay India merchant app. Conducted on-site user research in India to understand cultural nuances and pain points, then defined the communication framework and product naming to drive merchant adoption in a competitive market.</p>
+          <h2>Google</h2>
+          <p><em>continued</em></p>
+          <ul>
+            <li><strong>GPay India: Content designer</strong> Led the end-to-end content experience for the GPay India merchant app, taking a deeply proactive and autonomous approach to product design. I conducted immersive user research on-site in India to deeply understand the unique cultural nuances and pain points of merchant users. I translated these insights into a human-centered companion app, defining the communication framework and product naming to drive merchant engagement and adoption in a fast-moving, competitive market.</li>
+            <li><strong>Payments with Google Assistant: Conversation writer</strong> Owned the end-to-end conversation strategy and design for the "Pay with the Assistant" feature across voice and UI platforms. I collaborated closely with Engineering and Legal teams to navigate the complex regulatory requirements of voice-activated payments while maintaining a clear, human-centered experience. I influenced the strategic direction of the feature to ensure scalability and user-centricity, moving beyond simple script-writing to define the core interaction model.</li>
+          </ul>
+          <a href="portfolio.html" style="display:inline-block;margin-top:16px;padding:6px 16px;border:1.5px solid #999;border-radius:999px;font-family:'Crimson Text',serif;font-size:0.85rem;color:#555;text-decoration:none;">View Case Studies →</a>
           <div class="page-number">2</div>
         </div>
       </div>
 
-      <!-- Page 4 — Google Assistant -->
+      <!-- Page 3 — Capital One -->
       <div class="page">
         <div class="page-inner">
-          <h2>Google Assistant</h2>
-          <div class="img-container img-container-70" style="height: 200px; overflow: hidden; display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
-            <img src="images/IMG_0388.png" style="max-height: 100%; max-width: 100%; object-fit: contain;">
+          <h2>Capital One</h2>
+          <div class="reader-only" style="display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
+            <img src="images/IMG_0389.png" style="max-width: 100%; object-fit: contain;">
           </div>
-          <p>Owned end-to-end conversation strategy and design for "Pay with the Assistant" — a voice and UI payments feature spanning multiple platforms.</p>
-          <p>Collaborated closely with Engineering and Legal to navigate complex regulatory requirements of voice-activated payments while maintaining a clear, human-centered experience. Influenced the strategic direction of the feature early in the design phase, moving beyond script-writing to define the core interaction model.</p>
+          <p><em>UX Content Design Strategist — June 2015 to May 2017</em></p>
+          <ul>
+            <li><strong>End-to-end ownership:</strong> Planned and optimized content for complex user flows across multiple platforms, ensuring seamless transitions in the customer journey.</li>
+            <li><strong>Strategic collaboration:</strong> Co-created content workbooks to define conversation structures and interaction models for home and auto loan products.</li>
+            <li><strong>User-centered iteration:</strong> Translated "bank-speak" into accessible, human-centered language while meeting rigorous financial compliance standards.</li>
+          </ul>
+          <a href="capital-one.html" style="display:inline-block;margin-top:8px;padding:6px 16px;border:1.5px solid #999;border-radius:999px;font-family:'Crimson Text',serif;font-size:0.85rem;color:#555;text-decoration:none;">View Case Studies →</a>
+          <div class="page-number">2</div>
+        </div>
+      </div>
+
+      <!-- Page 4 — JCPenney -->
+      <div class="page">
+        <div class="page-inner">
+          <h2>JCPenney</h2>
+          <div class="reader-only" style="display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
+            <img src="images/image_transparent_original 2.png" style="max-width: 100%; object-fit: contain;">
+          </div>
+          <p><em>UX Content Strategist &amp; Copywriter — Feb 2014 to Jan 2015</em></p>
+          <ul>
+            <li><strong>Process &amp; scalability:</strong> Designed a new copy deck template and cross-platform content mapping system to document and solve experience gaps at scale.</li>
+            <li><strong>Voice &amp; consistency:</strong> Developed a comprehensive Digital Content Style Guide and established a consistent digital voice across desktop, mobile, and app.</li>
+            <li><strong>Product improvement:</strong> Rewrote complex technical and legal copy into simple, friendly, and helpful content that drove measurable improvements.</li>
+          </ul>
           <div class="page-number">3</div>
         </div>
       </div>
 
-      <!-- Page 5 — Capital One -->
+      <!-- Page 5 — Core Competencies -->
       <div class="page">
         <div class="page-inner">
-          <h2>Capital One</h2>
-          <div class="img-container img-container-70" style="height: 200px; overflow: hidden; display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
-            <div style="width: 90%; height: 140px; overflow: hidden; display: flex; align-items: center; justify-content: center; margin: 0 auto;">
-              <img src="images/IMG_0389.png" style="width: 100%; height: 100%; object-fit: cover; display: block;">
-            </div>
-          </div>
-          <p>UX Content Design Strategist, June 2015 – May 2017.</p>
-          <p>Planned, wrote, edited, tested, and improved content across user flows and end-to-end experiences on multiple platforms. Co-created content workbooks with design and product teammates, defining conversation structure, ideal phrases, and navigation patterns.</p>
-          <p>Immersed in the lives of home and auto customers to ensure product language was accessible — not "complex bank-speak" — in a heavily regulated financial domain.</p>
-          <a href="capital-one.html" style="display:inline-block;margin-top:8px;padding:6px 16px;border:1.5px solid #999;border-radius:999px;font-family:'Crimson Text',serif;font-size:0.85rem;color:#555;text-decoration:none;">View Case Studies →</a>
+          <h2>AI &amp; Core Competencies</h2>
+          <ul>
+            <li><strong>Generative AI Strategy:</strong> Defining the human-centric voice of AI interfaces. Expert at designing "trust flows" that explain automated decision-making and LLM outputs with clarity.</li>
+            <li><strong>Prompt Engineering:</strong> Building custom prompt libraries to automate content audits, scale nomenclature consistency, and accelerate localized product strings.</li>
+            <li><strong>Trust &amp; Ethics in AI:</strong> Navigating the regulatory maze of automated identity verification and fraud detection — ensuring AI feels safe and human.</li>
+            <li><strong>Strategic Product Partner:</strong> Operating like a "business owner" — leveraging AI and data to shape roadmaps, improve conversion, and reduce friction.</li>
+          </ul>
           <div class="page-number">4</div>
         </div>
       </div>
 
-      <!-- Page 6 — JCPenney -->
+      <!-- Page 6 — Tools -->
       <div class="page">
         <div class="page-inner">
-          <h2>JCPenney</h2>
-          <div class="img-container img-container-70" style="height: 200px; overflow: hidden; display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
-            <img src="images/image_transparent_original 2.png" style="max-height: 100%; max-width: 100%; object-fit: contain;">
-          </div>
-          <p>UX Content Strategist &amp; Copywriter, Feb 2014 – Jan 2015.</p>
-          <p>Optimized the content strategy delivery process across all stakeholders. Designed a new copy deck template and content mapping system for all digital platforms.</p>
-          <p>Developed "Penny" — a simple, human, and respectful digital voice — and wrote a Digital Content Style Guide to ensure consistency across desktop, tablet, mobile, and app. Rewrote technical error messages and legal copy into clear, friendly language, creating A/B test cases that drove measurable product improvements.</p>
-          <div class="page-number">5</div>
-        </div>
-      </div>
-
-      <!-- Page 7 — Skills -->
-      <div class="page">
-        <div class="page-inner">
-          <h2>Skills</h2>
+          <h2>Tools</h2>
           <ul>
-            <li><strong>Product strategy</strong> — End-to-end journey ownership, information architecture, and product naming.</li>
-            <li><strong>Content design</strong> — Systems thinking, content mapping, and scalable voice and style frameworks.</li>
-            <li><strong>Research &amp; data</strong> — Usability studies, A/B testing, and translating analytics into product decisions.</li>
-            <li><strong>Regulated domains</strong> — Navigating legal and compliance requirements in Fintech and Payments.</li>
-            <li><strong>Tools</strong> — Figma, Content Management Systems, Localization.</li>
+            <li><strong>Design &amp; Systems:</strong> Figma (Expert), FigJam, shared component libraries. Builds content design systems that allow teams to scale 10:1.</li>
+            <li><strong>AI &amp; Automation:</strong> ChatGPT, Gemini, Claude (Prompt Engineering), Jasper, Notion AI for content auditing and workflow optimization.</li>
+            <li><strong>Strategy &amp; Documentation:</strong> Scrivener, Miro (journey mapping), Google Analytics, CMS Management.</li>
+            <li><strong>Education:</strong> University of Arizona, Bachelor of Arts.</li>
           </ul>
-          <div class="page-number">6</div>
+          <div class="page-number">5</div>
         </div>
       </div>
 
@@ -513,17 +605,11 @@
   </div>
   </div>
 
-  <div id="scroll-arrow">
-    <span></span>
-    <span></span>
-  </div>
-
-  <div id="reader"></div>
 
   <script>
     function initBook() {
       const container = document.getElementById('book-container');
-      const w = Math.min(container.offsetWidth, 720);
+      const w = Math.min(container.offsetWidth, 900);
       const pageW = Math.floor(w / 2);
       const pageH = Math.floor(pageW * 1.33);
 
@@ -563,36 +649,7 @@
         updateNav(e.data);
       });
 
-      populateReader();
-      positionReader();
     }
-
-    function positionReader() {
-      const arrow = document.getElementById('scroll-arrow');
-      const currentTop = arrow.getBoundingClientRect().top + window.scrollY;
-      const targetTop = window.innerHeight - arrow.offsetHeight - 32 - (window.innerHeight * 0.1);
-      const margin = Math.max(targetTop - currentTop, 24);
-      arrow.style.marginTop = margin + 'px';
-      document.getElementById('reader').style.marginTop = '140px';
-    }
-
-    function populateReader() {
-      const allPages = document.querySelectorAll('#book .page');
-      const reader = document.getElementById('reader');
-      reader.innerHTML = '';
-      allPages.forEach(source => {
-        if (source.classList.contains('page-cover')) return;
-        const div = document.createElement('div');
-        div.className = 'reader-page';
-        const inner = source.querySelector('.page-inner');
-        div.innerHTML = inner ? inner.innerHTML : source.innerHTML;
-        reader.appendChild(div);
-      });
-    }
-
-    document.getElementById('scroll-arrow').addEventListener('click', () => {
-      document.getElementById('reader').scrollIntoView({ behavior: 'smooth' });
-    });
 
     document.fonts.ready.then(initBook);
   </script>
