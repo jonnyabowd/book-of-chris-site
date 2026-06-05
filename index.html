@@ -140,12 +140,19 @@
       }
     }
 
-    /* Mobile */
+    /* Mobile — single page mode */
     @media (max-width: 600px) {
-      #book-container { max-width: 100%; }
+      #book-container {
+        max-width: 100%;
+        overflow: hidden;
+      }
       .page-inner {
-        width: calc(100% / 0.4);
-        transform: scale(0.4);
+        width: calc(100% / 0.75);
+        transform: scale(0.75);
+      }
+      .page-inner p,
+      .page-inner ul {
+        font-size: 1.3rem;
       }
       h1 { font-size: 1.6rem; }
       .book-nav button { padding: 6px 14px; font-size: 0.9rem; }
@@ -609,9 +616,10 @@
   <script>
     function initBook() {
       const container = document.getElementById('book-container');
+      const isMobile = window.innerWidth < 600;
       const w = Math.min(container.offsetWidth, 900);
-      const pageW = Math.floor(w / 2);
-      const pageH = Math.floor(pageW * 1.33);
+      const pageW = isMobile ? Math.floor(w) : Math.floor(w / 2);
+      const pageH = isMobile ? Math.floor(pageW * 1.8) : Math.floor(pageW * 1.33);
 
       window.pageFlip = new St.PageFlip(document.getElementById('book'), {
         width: pageW,
