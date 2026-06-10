@@ -161,7 +161,7 @@
         font-size: 1.6rem;
       }
       h1 { font-size: 1.6rem; }
-      .book-nav button { padding: 6px 14px; font-size: 0.9rem; }
+      .page-turn { width: 26px; height: 26px; font-size: 0.9rem; }
     }
 
 
@@ -227,6 +227,14 @@
       line-height: 1.7;
     }
 
+    .page-inner ul li.section-header {
+      padding-left: 0;
+    }
+
+    .page-inner ul li.section-header::before {
+      display: none;
+    }
+
     .page-inner ul li strong {
       display: inline;
       text-align: left;
@@ -288,11 +296,61 @@
     }
 
     .page-inner .page-number {
-      margin-top: 24px;
+      position: absolute;
+      top: 16px;
+      right: 20px;
+      margin-top: 0;
       font-size: 0.75rem;
       color: #bbb;
-      text-align: center;
       font-style: italic;
+    }
+
+    /* Turn buttons */
+    .page-turn {
+      position: absolute;
+      bottom: 16px;
+      z-index: 5;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Crimson Text', serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #B8860B;
+      cursor: pointer;
+      border: 1.5px solid #B8860B;
+      border-radius: 999px;
+      background: rgba(184,134,11,0.08);
+      transition: background 0.2s, color 0.2s, border-color 0.2s, transform 0.15s;
+    }
+
+    .page-turn:hover {
+      background: #B8860B;
+      color: #fff;
+      border-color: #B8860B;
+      transform: scale(1.08);
+    }
+
+    .page-turn-prev { left: 16px; }
+    .page-turn-next { right: 16px; }
+
+    /* On desktop (two-page spread), only show the outer edge buttons
+       (front cover -> open, back cover -> back). Hide interior nav buttons. */
+    @media (min-width: 601px) {
+      .page-turn:not(.page-turn-edge) { display: none; }
+    }
+
+    .page-cover .page-turn {
+      border-color: #B8860B;
+      color: #C9A84C;
+      background: rgba(0,0,0,0.2);
+    }
+
+    .page-cover .page-turn:hover {
+      background: #B8860B;
+      color: #5C2E1A;
     }
 
     /* Cover pages */
@@ -398,46 +456,6 @@
       color: #C9A84C;
       opacity: 0.8;
       font-style: italic;
-    }
-
-    /* Navigation */
-    .book-nav {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 20px;
-      margin-top: 28px;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: #f5f0e8;
-      padding: 12px 0;
-      width: 100%;
-    }
-
-    .book-nav button {
-      background: none;
-      border: 1.5px solid #999;
-      border-radius: 999px;
-      padding: 8px 22px;
-      font-family: 'Crimson Text', serif;
-      font-size: 1rem;
-      cursor: pointer;
-      color: #555;
-      transition: background 0.2s, color 0.2s, border-color 0.2s;
-    }
-
-    .book-nav button:hover {
-      background: #2c2416;
-      color: #f5f0e8;
-      border-color: #2c2416;
-    }
-
-    #page-info {
-      font-size: 0.9rem;
-      color: #999;
-      font-style: italic;
-      min-width: 80px;
     }
 
     /* Reader */
@@ -550,9 +568,9 @@
       <!-- Front Cover -->
       <div class="page page-cover" data-density="hard">
         <div class="cover-inner">
-          <div class="cover-title">The Book<br>of Chris T.</div>
+          <div class="cover-title">The Book of<br>Chris Trotter</div>
           <div class="cover-rule"></div>
-          <div class="cover-sub">Content Writer &nbsp;·&nbsp; Designer &nbsp;·&nbsp; Strategist</div>
+          <div class="cover-sub">Content — Writer &nbsp;·&nbsp; Designer &nbsp;·&nbsp; Strategist</div>
         </div>
       </div>
 
@@ -617,7 +635,7 @@
             <img src="images/IMG_0380.png" style="max-width: 100%; object-fit: contain;">
           </div>
           <ul>
-            <li><strong>Google Wallet</strong>
+            <li class="section-header"><strong>Google Wallet</strong>
               <ul style="list-style:none;padding-left:0;margin-top:6px;">
                 <li><strong>Sole and lead content designer</strong> for the 2022 re-launch of Google Wallet.</li>
                 <li><strong>Owned the end-to-end user journey—</strong> from initial onboarding through to complex payment and identity management.</li>
@@ -626,7 +644,7 @@
                 <li><strong>Translated technical and legal complexities</strong> into human-centered digital experiences that drove adoption and conversion across global markets.</li>
               </ul>
             </li>
-            <li><strong>GPay App</strong>
+            <li class="section-header"><strong>GPay App</strong>
               <ul style="list-style:none;padding-left:0;margin-top:6px;">
                 <li><strong>Acted as a key strategic partner</strong> within the GPay product team, owning and creating the content strategy for high-impact payment features.</li>
                 <li><strong>Worked from discovery through launch to shape</strong> product flows and information architecture, ensuring complex financial transactions felt simple and trustworthy.</li>
@@ -644,14 +662,14 @@
           <h2>Google</h2>
           <p><em>continued</em></p>
           <ul>
-            <li><strong>GPay India</strong>
+            <li class="section-header"><strong>GPay India</strong>
               <ul style="list-style:none;padding-left:0;margin-top:6px;">
                 <li><strong>Led the end-to-end content experience</strong> for the GPay India merchant app, taking a deeply proactive and autonomous approach to product design.</li>
                 <li><strong>Conducted immersive user research on-site in India</strong> to deeply understand the unique cultural nuances and pain points of merchant users.</li>
                 <li><strong>Translated insights into a human-centered companion app,</strong> defining the communication framework and product naming to drive merchant engagement and adoption in a fast-moving, competitive market.</li>
               </ul>
             </li>
-            <li><strong>Payments with Google Assistant</strong>
+            <li class="section-header"><strong>Payments with Google Assistant</strong>
               <ul style="list-style:none;padding-left:0;margin-top:6px;">
                 <li><strong>Owned the end-to-end conversation strategy and design</strong> for the "Pay with the Assistant" feature across voice and UI platforms.</li>
                 <li><strong>Collaborated closely with Engineering and Legal teams</strong> to navigate complex regulatory requirements of voice-activated payments while maintaining a clear, human-centered experience.</li>
@@ -754,7 +772,7 @@
       <div class="page page-cover" data-density="hard">
         <div class="cover-inner">
           <div class="cover-rule"></div>
-          <div class="cover-sub">More words. Less fluff.</div>
+          <div class="cover-sub">Better Words. Less Fluff.</div>
           <div class="cover-rule" style="margin-top:16px;"></div>
         </div>
       </div>
@@ -762,14 +780,6 @@
     </div>
   </div>
 
-  <div class="book-nav" id="book-nav">
-    <button onclick="pageFlip.flipPrev()">&#8592; Prev</button>
-    <span id="page-info">Page 1</span>
-    <button onclick="pageFlip.flipNext()">Next &#8594;</button>
-  </div>
-  <div id="open-cta" style="display:none; text-align:center; margin-top:20px;">
-    <button onclick="pageFlip.flipNext()" style="background:none;border:none;font-family:'Crimson Text',serif;font-size:1.2rem;font-style:italic;color:#555;cursor:pointer;letter-spacing:0.05em;">Open and read &rarr;</button>
-  </div>
   </div>
 
 
@@ -795,29 +805,42 @@
 
       pageFlip.loadFromHTML(document.querySelectorAll('.page'));
 
-      const total = pageFlip.getPageCount();
-      const contentPages = total - 2;
+      // Add "Turn" buttons to bottom corners of each page
+      const allPages = document.querySelectorAll('#book .page');
+      allPages.forEach((page, idx) => {
+        const isFirst = idx === 0;
+        const isLast = idx === allPages.length - 1;
 
-      function pageLabel(index) {
-        const allPages = document.querySelectorAll('#book .page');
-        const p = allPages[index];
-        if (!p || p.classList.contains('page-cover')) return 'Cover';
-        return `Page ${index} of ${contentPages}`;
-      }
+        // On desktop spreads, each pair of pages should show only one
+        // back arrow (left page, far-left edge) and one forward arrow
+        // (right page, far-right edge) — not 4 arrows in the gutter.
+        const isLeftPageOfSpread = idx % 2 === 1;
+        const isRightPageOfSpread = idx % 2 === 0 && !isFirst;
 
-      function updateNav(index) {
-        const isCover = index === 0;
-        document.getElementById('book-nav').style.display = isCover ? 'none' : 'flex';
-        document.getElementById('open-cta').style.display = isCover ? 'block' : 'none';
-        document.getElementById('page-info').textContent = pageLabel(index);
-      }
+        if (!isFirst) {
+          const prevBtn = document.createElement('div');
+          const prevIsEdge = isLast || isLeftPageOfSpread;
+          prevBtn.className = 'page-turn page-turn-prev' + (prevIsEdge ? ' page-turn-edge' : '');
+          prevBtn.innerHTML = '&#8592;';
+          prevBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            pageFlip.flipPrev();
+          });
+          page.appendChild(prevBtn);
+        }
 
-      updateNav(pageFlip.getCurrentPageIndex());
-
-      pageFlip.on('flip', (e) => {
-        updateNav(e.data);
+        if (!isLast) {
+          const nextBtn = document.createElement('div');
+          const nextIsEdge = isFirst || isRightPageOfSpread;
+          nextBtn.className = 'page-turn page-turn-next' + (nextIsEdge ? ' page-turn-edge' : '');
+          nextBtn.innerHTML = '&#8594;';
+          nextBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            pageFlip.flipNext();
+          });
+          page.appendChild(nextBtn);
+        }
       });
-
     }
 
     document.fonts.ready.then(initBook);
