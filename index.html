@@ -284,6 +284,24 @@
       text-decoration: underline;
     }
 
+    .toc-list li.toc-sublink {
+      padding: 6px 0 12px 1.5em;
+      border-bottom: none;
+      cursor: default;
+    }
+
+    .toc-list li.toc-sublink a {
+      color: #999;
+      font-style: italic;
+      font-size: 0.95rem;
+      text-decoration: none;
+    }
+
+    .toc-list li.toc-sublink a:hover {
+      color: #B8860B;
+      text-decoration: underline;
+    }
+
     .page-inner blockquote {
       font-style: italic;
       font-size: 0.95rem;
@@ -588,9 +606,15 @@
               <span>Google</span>
               <span>1–2</span>
             </li>
+            <li class="toc-sublink" onclick="event.stopPropagation();" onmousedown="event.stopPropagation();">
+              <a href="portfolio.html">↳ View Case Studies</a>
+            </li>
             <li onclick="event.stopPropagation(); pageFlip.flip(5);" onmousedown="event.stopPropagation();">
               <span>Capital One</span>
               <span>3</span>
+            </li>
+            <li class="toc-sublink" onclick="event.stopPropagation();" onmousedown="event.stopPropagation();">
+              <a href="capital-one.html">↳ View Case Studies</a>
             </li>
             <li onclick="event.stopPropagation(); pageFlip.flip(6);" onmousedown="event.stopPropagation();">
               <span>JCPenney</span>
@@ -729,8 +753,11 @@
           <h2>AI &amp; Core Competencies</h2>
           <ul>
             <li><strong>Generative AI Strategy:</strong> Defining the human-centric voice of AI interfaces. Expert at designing "trust flows" that explain automated decision-making and LLM outputs with clarity.</li>
-            <li><strong>Prompt Engineering:</strong> Building custom prompt libraries to automate content audits, scale nomenclature consistency, and accelerate localized product strings.</li>
+            <li><strong>AI Literacy &amp; Evaluation:</strong> Judging AI-generated output against clear standards for accuracy, tone, and safety — not just writing prompts, but knowing what "good" looks like.</li>
+            <li><strong>Prompt &amp; Context Engineering:</strong> Building custom prompt libraries and pattern repositories to automate content audits, scale nomenclature consistency, and accelerate localized product strings.</li>
             <li><strong>Trust &amp; Ethics in AI:</strong> Navigating the regulatory maze of automated identity verification and fraud detection — ensuring AI feels safe and human.</li>
+            <li><strong>Accessibility (WCAG):</strong> Designing inclusive content and flows that meet accessibility standards for all users.</li>
+            <li><strong>Information Architecture:</strong> Structuring content and navigation so complex products feel simple and findable.</li>
             <li><strong>Strategic Product Partner:</strong> Operating like a "business owner" — leveraging AI and data to shape roadmaps, improve conversion, and reduce friction.</li>
           </ul>
           <div class="page-number">4</div>
@@ -744,7 +771,11 @@
           <ul>
             <li><strong>Design &amp; Systems:</strong> Figma (Expert), FigJam, shared component libraries. Builds content design systems that allow teams to scale 10:1.</li>
             <li><strong>AI &amp; Automation:</strong> ChatGPT, Gemini, Claude (Prompt Engineering), Jasper, Notion AI for content auditing and workflow optimization.</li>
-            <li><strong>Strategy &amp; Documentation:</strong> Scrivener, Miro (journey mapping), Google Analytics, CMS Management.</li>
+            <li><strong>Strategy &amp; Documentation:</strong> Scrivener, Miro (journey mapping), Notion, CMS Management.</li>
+            <li><strong>Analytics &amp; Testing:</strong> Google Analytics, Amplitude, A/B testing platforms (e.g., Optimizely).</li>
+            <li><strong>Localization:</strong> Phrase, Lokalise, and other translation management systems for global content.</li>
+            <li><strong>Accessibility:</strong> WCAG audit tools and accessibility checkers for inclusive content design.</li>
+            <li><strong>Workflow:</strong> Jira, Asana for cross-functional project management.</li>
           </ul>
           <div class="page-number">5</div>
         </div>
@@ -773,7 +804,7 @@
       <div class="page page-cover" data-density="hard">
         <div class="cover-inner">
           <div class="cover-rule"></div>
-          <div class="cover-sub">Better Words. Less Fluff.</div>
+          <div class="cover-sub">Be Excellent to Each Other.</div>
           <div class="cover-rule" style="margin-top:16px;"></div>
         </div>
       </div>
