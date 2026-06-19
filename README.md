@@ -6,7 +6,7 @@ An interactive, book-style portfolio site for **Chris Trotter** — presented as
 
 ## What it is
 
-Rather than a traditional scrolling résumé, the site renders Chris's career as a turnable book. Visitors flip through chapters — an "About" page, case-study spreads for Google, Capital One, and JCPenney, plus sections on AI competencies, tools, and education. Two companion pages ([capital-one.html](capital-one.html) and [portfolio.html](portfolio.html)) hold deeper case-study detail linked from the book.
+Rather than a traditional scrolling résumé, the site renders Chris's career as a turnable book. Visitors flip through chapters — an "About" page, case-study spreads for Google, Capital One, and JCPenney, plus sections on AI competencies, tools, and education. Two companion pages ([capital-one.html](capital-one.html) and [google.html](google.html)) hold deeper case-study detail linked from the book.
 
 ## How it's built
 
